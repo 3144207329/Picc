@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>新车拍照批改审批</title>
+	</head>
+	<style>
+		td{
+			font-size: 14px;
+		}
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+
+	</style>
+	<link rel="stylesheet" href="../../css/sweetalert.css" />
+	<link rel="stylesheet" href="../../jquery-easyui-1.5/themes/default/easyui.css">
+	<link rel="stylesheet"  href="../../jquery-easyui-1.5/themes/icon.css">
+	<body class="easyui-layout">
+		<div region="north">
+		<form id="form">
+			<table>
+				<tr>
+					<td>客户姓名:</td><td><input name="customerName" class="easyui-textbox"  style="width:165px"></td>
+					<td>业务编码:</td><td><input name="ncId" class="easyui-textbox"  style="width:165px"></td>
+					<td>车牌号:</td><td><input name="licensePlate" class="easyui-textbox"  style="width:165px"></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton"
+					 data-options="iconCls:'icon-search',plain:true" onclick="cha()">查询</a></td>
+				</tr>
+				
+				<tr>
+					<td>被保险人类型:</td>
+					<td><select editable="false"
+					class="easyui-combobox" name="insuredType" style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="0">个人</option>   
+					    <option value="1">公司</option>
+					</select></td>
+					<td>是否提交:</td>
+					<td><select editable="false"
+					class="easyui-combobox" name="submission" style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="0">未提交</option>   
+					    <option value="1">已提交</option>   
+					</select></td>
+						<td>注销状态:</td>
+						<td><select editable="false"
+						class="easyui-combobox" name="state" style="width:165px;">   
+					    <option value="">-请选择-</option>  
+					    <option value="1">启用</option> 
+						<option value="2">完成</option>
+						<option value="3">异常</option>
+					</select></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-reload',plain:true" onclick="chong()">重置</a></td>
+				</tr>
+			</table>
+		</form>
+		
+</div>
+	
+		<div region="center" border="false">
+		<div id="tb" style="height:auto">
+			<div id="tb" style="height:auto">
+				<a href="javascript:void(0)" class="easyui-linkbutton" 
+				data-options="iconCls:'icon-undo',plain:true" onclick="approval()">审批</a>
+				<a href="javascript:void(0)" class="easyui-linkbutton" 
+				data-options="iconCls:'icon-cancel',plain:true" onclick="reject()">驳回</a>
+			</div>
+
+		</div>
+		<table id="grid" data-options="toolbar: '#tb',singleSelect: true" class="easyui-datagrid">
+		</table>        
+		
+	
+	
+</div>
+
+<div id ="win" class ="easyui-window"  
+		data-options="resizable: false,collapsible:false,maximizable:false,modal:true,minimizable:false,footer:'#an'" title ="意见" style ="width:400px; height:350px;">
+		<form style ="padding:10px 20px 10px 40px;" id="loginFrom">
+			<input type="hidden" id="ncId"/>
+			<table  style="padding-top: 30px;">
+				<tr>
+					<td style="width: 350px;">请输入驳回意见：</td>
+					<td style="width: 300px; height: 40px;"><input id="rejectInformation" class="easyui-textbox" style="height: 80px;" > </td>
+				</tr>
+			</table>
+			<div style ="height: 40px;line-height: 40px;padding-right: 10px;" id="an" align="right">
+				<button id="update" onclick="boHui()" iconCls='icon-edit' class="easyui-linkbutton">驳回</button>
+			</div>
+		</form>
+	</div>
+	
+
+	<script src="../../jquery-easyui-1.5/jquery.min.js"></script>
+	<script src="../../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/moment.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.min.js"></script>
+	<script src="../../jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.mobile.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	
+	<script type="text/javascript">
+   // 定义列
+    var columns = [[
+       { field: 'ncId', title: '业务编码', width: 120, align: 'center' },
+       { field: 'userName', title: '录入人', width: 80, align: 'center'},
+       { field: 'company', title: '所属公司', width: 100, align: 'center' },
+       { field: 'customerName', title: '客户姓名', width: 100, align: 'center' },
+       { field: 'telephone',title: '电话号码',width: 100,align: 'center' },
+   	{ field: 'licensePlate',title: '车牌号',width: 100,align: 'center' },
+   	{ field: 'crossStrength',title: '交强保单号',width: 100,align: 'center' },
+   	{ field: 'business',title: '商业险包单号',width: 100,align: 'center' },
+   	{ field: 'insuredType',title: '被保险人类型',width: 80,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '个人'}  
+   			else if(value=='1'){return '公司'}
+   		  } },
+   	{ field: 'submission',title: '是否提交',width: 80,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '未提交'}  
+   			else if(value=='1'){return '已提交'}
+   		  } },
+   	{ field: 'reject',title: '是否驳回',width: 80,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '未驳回'}  
+   			else if(value=='1'){return '已驳回'}
+   		  } },
+   	{ field: 'approval',title: '是否批改',width: 80,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '未批改'}  
+   			else if(value=='1'){return '已批改'}
+   		  } },
+   	{ field: 'handle',title: '是否处理',width: 80,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '未处理'}  
+   			else if(value=='1'){return '已处理'}
+   		  } },
+   	{ field: 'state',title: '状态',width: 80,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '注销'}  
+   			else if(value=='1'){return '启用'}
+			else if(value=='2'){return '完成'}
+			else if(value=='3'){return '异常'}
+   		  }
+   		  } ]];
+    
+    
+    $(function(){
+    	$('#win').panel('close');
+    	cha();
+    });
+    //驳回
+    function reject(){
+    	var row = $('#grid').datagrid('getSelected');
+    	if (row) {
+			var ncId=row.ncId;
+    		$.post("http://127.0.0.1:8090/newCarById",{ncId:ncId}).always(function(data){
+    			var json=JSON.parse(data);
+				if(json.data.state != 1){
+					swal("操作失败！", "已完成的订单，不能驳回！", "error");
+    			}else if(json.data.approval == 1){
+					swal("操作失败！", "已审批的工单，不能驳回！", "error");
+    			}else{
+					$('#win').panel('open');
+					$("#ncId").val(ncId);
+    			}
+    		})
+    		
+    	 }else{
+    		swal("操作失败！", "请选择一行信息", "error");
+    	 }
+    	
+    }
+    
+    
+    //审批
+    function approval(){
+    	var row = $('#grid').datagrid('getSelected');
+    	
+    	if (row) {
+    		var ncId=row.ncId;
+    		$.post("http://127.0.0.1:8090/newCarById",{ncId:ncId}).always(function(data){
+				
+    			if(JSON.parse(data).data.approval == 1){
+    				swal("操作失败！", "此单已审批，不能重复审批！", "error");
+    			}else if(JSON.parse(data).data.state == 1){
+    				$.post("http://127.0.0.1:8090/newCarApproval",{ncId:ncId}).always(function(data){
+    					var json=JSON.parse(data);
+    						if(json.data == 1){
+    							swal("操作成功!", "订单已完成！", "success");
+    							cha();
+    						}else{
+    							swal("操作失败！", "系统错误！", "error");
+    						}
+    				})
+    			}else{
+    				swal("操作失败！", "此单已完成，不能审批！", "error");
+    			}
+    		})
+    		
+    	 }else{
+    		swal("操作失败！", "请选择一行信息", "error");
+    	 }
+    	
+    }
+    	
+    	//点击驳回按钮
+    	function boHui(){
+    		var ncId=$("#ncId").val();
+    		var rejectInformation=$("#rejectInformation").textbox('getValue');
+    		$.post("http://127.0.0.1:8090/newCarReject",{ncId:ncId,rejectInformation:rejectInformation}).always(function(data){
+    			if(JSON.parse(data).data == 1){
+    				swal("操作成功!", "订单已驳回！", "success");
+    				$('#win').panel('close');
+    				cha();
+    			}else{
+    				swal("操作失败！", "系统错误！", "error");
+    			}
+    		})
+    	}
+    //查询
+    function cha(){
+    	
+    	$.post("http://127.0.0.1:8090/newCarApprovalAll",$("#form").serialize()).always(function(data){
+    		var json=JSON.parse(data);
+    		// 用户管理数据表格
+    		$('#grid').datagrid({
+    		    iconCls: 'icon-forward',
+    		    fit: true,
+    		    border: true,
+    		    rownumbers: true,
+    		    striped: true,
+    		    pageSize:5,
+    		    pageList: [5,10,30, 50, 100],
+    		    pagination: true,
+    			idField: 'ncId',
+    			remoteSort:false,
+    			multiSort:true,
+    		    //toolbar: toolbar,
+    		    //queryParams: {"page":page,"rows":rows},
+    			loadFilter:pagerFilter,
+    		    columns: columns
+    		});
+    		if(json.data != null){
+    			$("#grid").datagrid("loadData",json.data);
+    		}else{
+    			$('#grid').datagrid('loadData', { total: 0, rows: [] });  
+    		}
+    	})
+    	
+    }
+    	
+    	function pagerFilter(data){
+    	    if (typeof data.length == 'number' && typeof data.splice == 'function'){    // 判断数据是否是数组
+    	        data = {
+    	            total: data.length,
+    	            rows: data
+    	        }
+    	    }
+    	    var dg = $(this);
+    	    var opts = dg.datagrid('options');
+    	    var pager = dg.datagrid('getPager');
+    	    pager.pagination({
+    	        onSelectPage:function(pageNum, pageSize){
+    	            opts.pageNumber = pageNum;
+    	            opts.pageSize = pageSize;
+    	            pager.pagination('refresh',{
+    	                pageNumber:pageNum,
+    	                pageSize:pageSize
+    	            });
+    	            dg.datagrid('loadData',data);
+    	        }
+    	    });
+    	    if (!data.originalRows){
+    	        data.originalRows = (data.rows);
+    	    }
+    	    var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+    	    var end = start + parseInt(opts.pageSize);
+    	    data.rows = (data.originalRows.slice(start, end));
+    	    return data;
+    	}
+	
+	
+	</script>
+	</body>
+</html>

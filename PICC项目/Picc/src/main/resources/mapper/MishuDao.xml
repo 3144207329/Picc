@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.MishuDao">
+
+    <!--添加信息-->
+      <insert id="mishuAdd" parameterType="com.bdqn.pojo.Mishu" >
+           INSERT INTO mishu (
+                userId,company,customerName,telephone,licensePlate,plateColor,threeInOne,state,submission
+           )
+           VALUES(
+               #{userId},
+               '石家庄',
+               #{customerName},
+               #{telephone},
+               #{licensePlate},
+               #{plateColor},
+               #{threeInOne},
+               1,
+               #{submission}
+           )
+       </insert>
+    <!--修改信息-->
+    <update id="mishuUpdate" parameterType="com.bdqn.pojo.Mishu" >
+          UPDATE `mishu`
+SET
+  customerName=#{customerName},
+  `telephone` = #{telephone},
+  `licensePlate` = #{licensePlate},
+  `plateColor` = #{plateColor},
+  `threeInOne` = #{threeInOne},
+  `submission` = #{submission},
+  reject=0
+  WHERE `msId` = #{msId}
+    </update>
+    <!--将状态改为注销-->
+    <update id="mishuDelete" >
+          UPDATE `mishu`
+    SET
+    `state` = 0
+  WHERE `msId` = #{msId}
+    </update>
+    <!--根据id查询数据-->
+    <select id="mishuById" resultType="com.bdqn.pojo.Mishu">
+        select * from mishu where msId=#{msId}
+    </select>
+
+    <resultMap id="mishu" type="com.bdqn.pojo.Mishu">
+        <result property="msId" column="msId"></result>
+        <result property="userId" column="userId"></result>
+        <result property="company" column="company"></result>
+        <result property="customerName" column="customerName"></result>
+        <result property="telephone" column="telephone"></result>
+        <result property="licensePlate" column="licensePlate"></result>
+        <result property="plateColor" column="plateColor"></result>
+        <result property="threeInOne" column="threeInOne"></result>
+        <result property="state" column="state"></result>
+        <result property="userName" column="userName"></result>
+        <result property="submission" column="submission"></result>
+        <result property="reject" column="reject"></result>
+        <result property="rejectInformation" column="rejectInformation"></result>
+        <result property="approval" column="approval"></result>
+    </resultMap>
+
+    <!--查询车主秘书所有数据-->
+    <select id="mishuAll" resultMap="mishu" parameterType="com.bdqn.pojo.Mishu">
+        SELECT m.*,u.userName
+        FROM mishu AS m,USER AS u
+        WHERE m.`userId`=u.`userid`
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="msId != null and msId != ''">AND msId LIKE CONCAT('%',#{msId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="threeInOne == 1 or threeInOne == 0">AND threeInOne=#{threeInOne}</if>
+        <if test="state == 1 or state == 0 or state == 2">AND m.state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="approval == 1 or approval == 0">AND approval=#{approval}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY msId DESC
+    </select>
+    <!--查询未提交未驳回的所有数据-->
+    <select id="caoGaoAll" resultMap="mishu" parameterType="com.bdqn.pojo.Mishu">
+    SELECT m.*,u.userName
+    FROM mishu AS m,USER AS u
+    WHERE m.`userId`=u.`userid` and submission = 0 and reject = 0 and m.state in (1,2)
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="msId != null and msId != ''">AND msId LIKE CONCAT('%',#{msId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="threeInOne == 1 or threeInOne == 0">AND threeInOne=#{threeInOne}</if>
+        <if test="state == 1 or state == 0 or state == 2">AND m.state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="approval == 1 or approval == 0">AND approval=#{approval}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+    ORDER BY msId DESC
+</select>
+
+
+    <!--查询未提交已驳回的所有数据-->
+    <select id="boHuiAll" resultMap="mishu" parameterType="com.bdqn.pojo.Mishu">
+        SELECT m.*,u.userName
+        FROM mishu AS m,USER AS u
+        WHERE m.`userId`=u.`userid` and submission = 0 and reject = 1 and m.state in (1,2)
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="msId != null and msId != ''">AND msId LIKE CONCAT('%',#{msId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="threeInOne == 1 or threeInOne == 0">AND threeInOne=#{threeInOne}</if>
+        <if test="state == 1 or state == 0 or state == 2">AND m.state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="approval == 1 or approval == 0">AND approval=#{approval}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY msId DESC
+    </select>
+
+    <!--查询未提交未驳回的总行数-->
+    <select id="caoGaoCount" resultType="int" parameterType="com.bdqn.pojo.Mishu">
+        SELECT count(*)
+        FROM mishu
+        WHERE submission = 0 and reject = 0 and state in (1,2)
+    </select>
+    <!--查询未提交已驳回的总行数-->
+    <select id="boHuiCount" resultType="int" parameterType="com.bdqn.pojo.Mishu">
+        SELECT count(*)
+        FROM mishu
+        WHERE reject = 1 and submission = 0 and  state in (1,2)
+    </select>
+
+
+    <!--组长审批时查询已提交或已驳回的所有数据-->
+    <select id="approvalAll" resultMap="mishu" parameterType="com.bdqn.pojo.Mishu">
+        SELECT m.*,u.userName
+        FROM mishu AS m,USER AS u
+        WHERE m.`userId`=u.`userid` AND reject = 0 AND submission = 1 and m.state in (1,2)
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="msId != null and msId != ''">AND msId LIKE CONCAT('%',#{msId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="threeInOne == 1 or threeInOne == 0">AND threeInOne=#{threeInOne}</if>
+        <if test="state == 1 or state == 0 or state == 2">AND m.state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="approval == 1 or approval == 0">AND approval=#{approval}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY msId DESC
+    </select>
+
+    <!--审批按钮修改-->
+    <update id="approval" >
+          UPDATE `mishu`
+          SET `state` = 2,`approval` = 1
+          WHERE `msId` = #{msId}
+    </update>
+
+    <!--驳回按钮修改-->
+    <update id="reject" >
+          UPDATE `mishu`
+          SET `reject` = 1,
+          submission = 0,
+          `rejectInformation` = #{rejectInformation}
+          WHERE `msId` = #{msId}
+    </update>
+</mapper>

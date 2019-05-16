@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.DesigNatedDao">
+    <resultMap id="byname" type="com.bdqn.pojo.DesigNated">
+        <result column="userName" property="userName"></result>
+    </resultMap>
+    <!--查询全部数据-->
+    <select id="ListByDesigNated" resultMap="byname" parameterType="com.bdqn.pojo.DesigNated">
+        SELECT d.*,u.userName
+        FROM designated AS d,USER AS u
+        WHERE u.`userId`=d.`userid`
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="dgId != null and dgId != ''">AND dgId LIKE CONCAT('%',#{dgId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="threeInOne == 1 or threeInOne == 0">AND threeInOne=#{threeInOne}</if>
+        <if test="state == 0 or state == 1">AND state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="clickType == 0 or clickType == 1">AND clickType=#{clickType}</if>
+        <if test="state == 1 or state == 0">AND d.state=#{state}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY dgId DESC
+    </select>
+    <!--根据id查询数据-->
+    <select id="GetById" parameterType="com.bdqn.pojo.DesigNated" resultType="com.bdqn.pojo.DesigNated">
+        select  *  from designated where dgId=#{dgId}
+    </select>
+    <update id="updateBydgId" parameterType="com.bdqn.pojo.DesigNated">
+      UPDATE  designated  SET customerName=#{customerName},telephone=#{telephone},location=#{location},destination=#{destination},licensePlate=#{licensePlate},clickType=#{clickType},appointmentTime=#{appointmentTime},submission=1 where dgId=#{dgId}
+    </update>
+    <insert id="insertOne" parameterType="com.bdqn.pojo.DesigNated">
+         INSERT INTO designated (
+            dgId,userId,company,customerName,telephone,licensePlate,location,destination,appointmentTime,threeInOne,clickType,submission
+           )
+           VALUES(
+                default,
+               #{userId},
+               '石家庄',
+               #{customerName},
+               #{telephone},
+               #{licensePlate},
+               #{location},
+               #{destination},
+               #{appointmentTime},
+               #{threeInOne},
+               #{clickType},
+               0
+           )
+    </insert>
+
+    <insert id="insertsubmit" parameterType="com.bdqn.pojo.DesigNated">
+         INSERT INTO designated (
+            dgId,userId,company,customerName,telephone,licensePlate,location,destination,appointmentTime,threeInOne,clickType,submission,handle,state
+           )
+           VALUES(
+                default,
+               #{userId},
+               '石家庄',
+               #{customerName},
+               #{telephone},
+               #{licensePlate},
+               #{location},
+               #{destination},
+               #{appointmentTime},
+               #{threeInOne},
+               #{clickType},
+                1
+           )
+    </insert>
+<!--修改状态-->
+    <update id="updateBystate" parameterType="com.bdqn.pojo.DesigNated">
+      UPDATE  designated SET  state=0   where dgId=#{dgId}
+    </update>
+    <!--修改状态-->
+    <update id="updateByshenhe" parameterType="com.bdqn.pojo.DesigNated">
+      UPDATE  designated SET  `reject` = 1,
+          submission = 0,
+          `rejectInformation` = #{rejectInformation}   where dgId=#{dgId}
+    </update>
+    <update id="updateBybohui" parameterType="com.bdqn.pojo.DesigNated">
+        update designated set reject=1,rejectInformation=#{rejectInformation}   where dgId=#{dgId}
+    </update>
+
+    <update id="updateByslingqu" parameterType="com.bdqn.pojo.DesigNated">
+      UPDATE  designated SET  lingqu=1   where dgId=#{dgId}
+    </update>
+    <update id="updateBychuli" parameterType="com.bdqn.pojo.DesigNated">
+        update designated set `handle` = 1,state=2   where dgId=#{dgId}
+    </update>
+
+    <!--组长审批查询全部数据-->
+    <select id="designatedApprovalAll" resultMap="byname" parameterType="com.bdqn.pojo.DesigNated">
+        SELECT d.*,u.userName
+        FROM designated AS d,USER AS u
+        WHERE u.`userId`=d.`userid` AND reject = 0 AND submission = 1 and d.state = 1
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="dgId != null and dgId != ''">AND dgId LIKE CONCAT('%',#{dgId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="threeInOne == 1 or threeInOne == 0">AND threeInOne=#{threeInOne}</if>
+        <if test="state == 0 or state == 1">AND state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND approval=#{approval}</if>
+        <if test="clickType == 0 or clickType == 1">AND clickType=#{clickType}</if>
+        <if test="state == 1 or state == 0">AND d.state=#{state}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY dgId DESC
+    </select>
+
+    <!--调度员领取查询全部数据-->
+    <select id="designatedReceiveAll" resultMap="byname" parameterType="com.bdqn.pojo.DesigNated">
+        SELECT d.*,u.userName
+        FROM designated AS d,USER AS u
+        WHERE u.`userId`=d.`userid` AND approval=1 AND submission = 1  and d.state in (1,2)
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="dgId != null and dgId != ''">AND dgId LIKE CONCAT('%',#{dgId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="threeInOne == 1 or threeInOne == 0">AND threeInOne=#{threeInOne}</if>
+        <if test="state == 0 or state == 1">AND state=#{state}</if>
+        <if test="lingqu == 1 or lingqu == 0">AND lingqu=#{lingqu}</if>
+        <if test="handle == 1 or handle == 0">AND handle=#{handle}</if>
+        <if test="clickType == 0 or clickType == 1">AND clickType=#{clickType}</if>
+        <if test="state == 1 or state == 0">AND d.state=#{state}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY dgId DESC
+    </select>
+</mapper>

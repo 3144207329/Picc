@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.MenuDao">
+
+
+    <!--   <insert id="insert" parameterType="com.bdqn.pojo.Demo" >
+           INSERT INTO  (
+
+           )
+           VALUES(
+               #{},
+               #{},
+               #{}
+           )
+       </insert>
+
+       <delete id="delete" parameterType="com.bdqn.pojo.Demo" >
+           DELETE FROM
+           WHERE
+       </delete>-->
+
+    <select id="shu" resultType="com.bdqn.pojo.Menu">
+        SELECT m.*
+        FROM menu AS m,rolemenu AS rm
+        WHERE m.mid=rm.mid AND rm.roleid=#{rid} AND m.pid IS NULL
+    </select>
+
+    <select id="zi" resultType="com.bdqn.pojo.Menu">
+       SELECT m2.*
+        FROM menu m1,menu m2
+        WHERE m1.mid=m2.pid
+         <if test="rid > 2"> AND m2.mid IN (
+             SELECT m2.mid
+             FROM menu m2,rolemenu rm
+             WHERE rm.`mid`=m2.mid AND roleid=#{rid}  AND m2.`mlevel`=2 )</if>
+        AND m2.pid=#{pid}
+    </select>
+
+
+</mapper>

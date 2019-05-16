@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>代检车业务审批</title>
+	</head>
+	<style>
+		td{
+			font-size: 14px;
+		}
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+
+	</style>
+	<link rel="stylesheet" href="../../css/sweetalert.css" />
+	<link rel="stylesheet" href="../../jquery-easyui-1.5/themes/default/easyui.css">
+	<link rel="stylesheet"  href="../../jquery-easyui-1.5/themes/icon.css">
+	<body class="easyui-layout">
+		<div region="north">
+		<form id="form">
+			<table>
+				<tr id="c">
+					<td>客户姓名:</td><td><input class="easyui-textbox" name="customerName" style="width:165px"></td>
+					<td>业务编码:</td><td><input class="easyui-textbox" name="msId" style="width:165px"></td>
+					<td>车牌号:</td><td><input class="easyui-textbox" name="licensePlate"  style="width:165px"></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true" onclick="chong()" >重置</a></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="cha()">查询</a></td>
+				</tr>
+				
+				<tr>
+					<td>是否审批:</td>
+					<td><select id="cc" editable="false"
+					class="easyui-combobox" name="approval" style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="1">已审批</option>   
+					    <option value="0">未审批</option>   
+					</select></td>
+					<td>注销状态:</td>
+					<td><select id="cc" editable="false"
+					 class="easyui-combobox" name="state" style="width:165px;">   
+					    <option  value="">-请选择-</option>   
+					    <option value="1">启用</option>   
+					    <option value="0">注销</option>   
+					    <option value="2">完成</option>   
+					</select></td>
+					
+				</tr>
+			</table>
+		</form>
+		
+</div>
+	
+		<div region="center" border="false">
+		<div id="tb" style="height:auto">
+			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="approval()">审批</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="reject()">驳回</a>
+
+		</div>
+		<table id="grid" data-options="toolbar: '#tb',singleSelect: true" class="easyui-datagrid">
+		</table>        
+		
+	
+	
+</div>
+
+
+<div id ="win" class ="easyui-window"  
+		data-options="resizable: false,collapsible:false,maximizable:false,modal:true,minimizable:false,footer:'#an'" title ="意见" style ="width:400px; height:350px;">
+		<form style ="padding:10px 20px 10px 40px;" id="loginFrom">
+			<input type="hidden" id="msId"/>
+			<table  style="padding-top: 30px;">
+				<tr>
+					<td style="width: 350px;">请输入驳回意见：</td>
+					<td style="width: 300px; height: 40px;"><input id="rejectInformation" class="easyui-textbox" style="height: 80px;" > </td>
+				</tr>
+			</table>
+			<div style ="height: 40px;line-height: 40px;padding-right: 10px;" id="an" align="right">
+				<button id="update" onclick="boHui()" iconCls='icon-edit' class="easyui-linkbutton">驳回</button>
+			</div>
+		</form>
+	</div>
+
+	<script src="../../jquery-easyui-1.5/jquery.min.js"></script>
+	<script src="../../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/moment.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.min.js"></script>
+	<script src="../../jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.mobile.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	
+	<script type="text/javascript">
+     // 定义列
+    var columns = [[
+        { field: 'msId', title: '业务编码', width: 80, align: 'center' },
+        { field: 'userName', title: '录入人', width: 80, align: 'center'},
+        { field: 'company', title: '所属公司', width: 100, align: 'center' },
+        { field: 'customerName', title: '客户姓名', width: 100, align: 'center' },
+        { field: 'telephone',title: '电话号码',width: 80,align: 'center' },
+    	{ field: 'vehicleType',title: '车型',width: 80,align: 'center' },
+    	{ field: 'licensePlate',title: '车牌号',width: 80,align: 'center' },
+    	{ field: 'strengthPolicy',title: '交强保单号',width: 80,align: 'center' },
+    	{ field: 'testingName',title: '检测站名称',width: 80,align: 'center' },
+    	{ field: 'scheduledTime',title: '预定时间',width: 80,align: 'center' },
+    	{ field: 'reject',title: '是否驳回',width: 80,align: 'center' ,
+    	formatter : function(value,row,index){
+                    if(value=='0'){return '未驳回'}  
+                    else if(value=='1'){return '已驳回'}
+                  } },
+    	{ field: 'approval',title: '是否审批',width: 80,align: 'center' ,
+    		formatter : function(value,row,index){
+                    if(value=='0'){return '未审批'}  
+                    else if(value=='1'){return '已审批'}
+                  } },
+    	{ field: 'submission',title: '是否提交',width: 80,align: 'center' ,
+    	formatter : function(value,row,index){
+                    if(value=='1'){return '已提交'}  
+                    else if(value=='0'){return '未提交'}
+                  } },
+    	{field: 'handle',title: '是否处理',width: 80,align: 'center' ,
+    	formatter : function(value,row,index){
+                    if(value=='1'){return '已处理'}  
+                    else if(value=='0'){return '未处理'}
+                  } },
+    	{field: 'state',title: '状态',width: 80,align: 'center' ,
+    	formatter : function(value,row,index){
+                     if(value=='1'){return '启用'}  
+			        else if(value=='0'){return '注销'}
+					else if(value=='2'){return '完成'}
+                  }},
+    	]];
+    
+    $(function(){
+		
+		cha();
+		$.extend($.fn.validatebox.defaults.rules, {
+			csqn: {
+    			validator: function (value) {
+    			var now = new Date();
+    			var date=moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
+    			if (date <= value) {
+    				return true;
+				}else{
+    				return false;
+    			}
+    			},
+    			message: '预订日期必须大于等于当前日期'
+    			},
+				phoneNum: { //验证手机号   
+
+    		        validator: function(value, param){ 
+
+    		         return /^1[3-8]+\d{9}$/.test(value);
+
+    		        },    
+
+    		        message: '请输入正确的手机号码。'   
+
+    		    }
+		})
+
+		yanzheng();
+		$('#win').panel('close').panel('refresh');
+    	// 用户管理数据表格
+        $('#grid').datagrid({
+            iconCls: 'icon-forward',
+            fit: true,
+            border: true,
+            rownumbers: true,
+            striped: true,
+            pageSize:5,
+            pageList: [5,10,30, 50, 100],
+            pagination: true,
+            //toolbar: toolbar,
+			url: "EasyUIlist.json",
+			method:"get",
+            //queryParams: {"page":page,"rows":rows},
+            idField: 'Id',
+            columns: columns
+        });
+    });
+	
+	//表单验证
+	function yanzheng(){
+		var chexing=$("#chexing");
+			var yewu=$("#yewu");
+			var yonghu=$("#yonghu");
+			var dianhua=$("#dianhua");
+			var chepai=$("#chepai");
+			var baodanhao=$("#baodanhao");
+			var jianchezhan=$("#jianchezhan");
+			var yuyue=$("#yuyue");
+			var shifotijiao=$("#shifotijiao");
+			yewu.textbox({    
+				    required:true,
+				    missingMessage:'业务不能为空' 
+			})
+			yonghu.textbox({    
+				    required:true,
+				    missingMessage:'用户不能为空' 
+			})
+			dianhua.textbox({    
+				    required:true,
+					validType:'phoneNum'
+			})
+			chepai.textbox({    
+				    required:true,
+				    missingMessage:'车牌号不能为空' 
+			})
+				chexing.textbox({    
+				    required:true,
+				    missingMessage:'车型不能为空' 
+			})
+					baodanhao.textbox({    
+				    required:true,
+				    missingMessage:'较强表单号不能为空' 
+			})
+						jianchezhan.textbox({    
+				    required:true,
+				    missingMessage:'监测站不能为空' 
+			})
+			yuyue.textbox({  
+				    required:true,
+					validType:'csqn'
+			})
+	}
+	//重置
+	function chong(){
+		$("#form").form("reset");
+	}
+
+	//查询
+	function cha(){
+		$.post("http://127.0.0.1:8090/jianapprovalAll",$("#form").serialize()).always(function(data){
+			var json=JSON.parse(data);
+			
+			// 用户管理数据表格
+			$('#grid').datagrid({
+			    iconCls: 'icon-forward',
+			    fit: true,
+			    border: true,
+			    rownumbers: true,
+			    striped: true,
+			    pageSize:5,
+			    pageList: [5,10,30, 50, 100],
+			    pagination: true,
+				idField: 'msId',
+				remoteSort:false,
+				multiSort:true,
+			    //toolbar: toolbar,
+			    //queryParams: {"page":page,"rows":rows},
+				loadFilter:pagerFilter,
+			    columns: columns
+			});
+			if(json.data != null){
+				$("#grid").datagrid("loadData",json.data);
+			}else{
+				$('#grid').datagrid('loadData', { total: 0, rows: [] });  
+			}
+		})
+	}
+		//审批
+	function approval(){
+		var row = $('#grid').datagrid('getSelected');
+		if (row) {
+			var msId=row.msId;
+			$.post("http://127.0.0.1:8090/jiancheById",{msId:msId}).always(function(data){
+				if(JSON.parse(data).data.state == 1){
+					
+					$.post("http://127.0.0.1:8090/jiancheapproval",{msId:msId}).always(function(data){
+						var json=JSON.parse(data);
+							if(json.data == 1){
+								swal("操作成功!", "订单已完成！", "success");
+								cha();
+							}else{
+								swal("操作失败！", "系统错误！", "error");
+							}
+					})
+				}else{
+					swal("操作失败！", "此单已完成，不能审批！", "error");
+				}
+			})
+			
+		 }else{
+			swal("操作失败！", "请选择一行信息", "error");
+		 }
+		
+	}
+	//驳回
+	function reject(){
+		var row = $('#grid').datagrid('getSelected');
+		if (row) {
+			var msId=row.msId;
+			$.post("http://127.0.0.1:8090/jiancheById",{msId:msId}).always(function(data){
+				var json=JSON.parse(data);
+				if(json.data.state != 1){
+					swal("操作失败！", "已完成的订单，不能驳回！", "error");
+				}else if(json.data.approval == 1){
+					swal("操作失败！", "已审批的工单，不能驳回！", "error");
+				}else{
+					$('#win').panel('open');
+					$("#msId").val(msId);
+				}
+			})
+			
+		 }else{
+			swal("操作失败！", "请选择一行信息", "error");
+		 }
+		
+	}
+	//点击驳回按钮
+		function boHui(){
+			var msId=$("#msId").val();
+			var rejectInformation=$("#rejectInformation").textbox('getValue');
+			$.post("http://127.0.0.1:8090/jianchereject",{msId:msId,rejectInformation:rejectInformation}).always(function(data){
+				if(JSON.parse(data).data == 1){
+					swal("操作成功!", "订单已驳回！", "success");
+					$('#win').panel('close');
+					cha();
+				}else{
+					swal("操作失败！", "系统错误！", "error");
+				}
+			})
+		}
+	
+	function pagerFilter(data){
+		    if (typeof data.length == 'number' && typeof data.splice == 'function'){    // 判断数据是否是数组
+		        data = {
+		            total: data.length,
+		            rows: data
+		        }
+		    }
+		    var dg = $(this);
+		    var opts = dg.datagrid('options');
+		    var pager = dg.datagrid('getPager');
+		    pager.pagination({
+		        onSelectPage:function(pageNum, pageSize){
+		            opts.pageNumber = pageNum;
+		            opts.pageSize = pageSize;
+		            pager.pagination('refresh',{
+		                pageNumber:pageNum,
+		                pageSize:pageSize
+		            });
+		            dg.datagrid('loadData',data);
+		        }
+		    });
+		    if (!data.originalRows){
+		        data.originalRows = (data.rows);
+		    }
+		    var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+		    var end = start + parseInt(opts.pageSize);
+		    data.rows = (data.originalRows.slice(start, end));
+		    return data;
+	}
+	//修改
+	function xianUpdate(){
+		var row = $('#grid').datagrid('getSelected');
+		if (row) {
+				$("#loginFrom").form("reset");
+				$("#add").css({"display": "none"});
+				$("#update").show();
+				$("#win").panel({
+					iconCls:'icon-edit',
+					height:500, 
+					title: '修改'
+				})
+				$('#win').panel('open').panel('refresh');
+		 }else{
+			swal("操作失败！", "请选择一行信息", "error");
+		 }
+	}
+		
+		//点击修改按钮
+		function update(){
+			if(!$("#loginFrom").form('enableValidation').form('validate')){
+			}else{
+					$('#win').panel('close');
+					swal("操作成功!", "修改成功！", "success");
+				
+			}
+		}
+		//点击添加按钮
+		function add(){
+			if(!$("#loginFrom").form('enableValidation').form('validate')){
+			}else{
+				$('#win').panel('close');
+				swal("操作成功!", "添加成功！", "success");
+			}
+		}
+			//删除
+			function removeit(){
+				var row = $('#grid').datagrid('getSelected');
+				if (row) {
+					swal({
+						title: "您确定要删除吗？",
+						text: "您确定要删除这条数据？",
+						type: "warning",
+						showCancelButton: true,
+						closeOnConfirm: false,
+						confirmButtonText: "是的，我要删除",
+						confirmButtonColor: "#ec6c62"
+					}, function() {
+						
+							var rowIndex = $('#grid').datagrid('getRowIndex', row);
+							$('#grid').datagrid('deleteRow', rowIndex);  
+							swal("操作成功!", "已成功删除数据！", "success");
+						
+						});
+				}else{
+					swal("操作失败！", "请选择一行信息", "error");
+	
+				}
+				
+			}
+			//提交按钮
+			function tijiao(){
+				var row = $('#grid').datagrid('getSelected');
+				
+				if (row) {
+					swal("操作成功!", "提交成功！", "success");
+				 }else{
+					 swal("操作失败！", "请选择一行信息", "error");
+				 }
+			}
+	</script>
+	</body>
+</html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>系统管理</title>
+	</head>
+	<style>
+		td{
+			font-size: 14px;
+		}
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+
+	</style>
+	
+	
+	
+	<link rel="stylesheet" href="../../jquery-easyui-1.5/themes/default/easyui.css" />
+	<link rel="stylesheet" href="../../jquery-easyui-1.5/themes/icon.css" />
+	<link rel="stylesheet" href="../../css/sweetalert.css" />
+	
+	<body class="easyui-layout">
+	<div region="north">
+		<form id="form" >
+			<table>
+				<tr>
+					<td>编号:</td><td><input type="text" name="userCode"></td>
+					<td>姓名:</td><td><input type="text" name="userName"></td>
+					<td>性别:</td><td><select  
+					class="easyui-combobox" name="userGender" editable="false" style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="1">男</option>   
+					    <option value="0">女</option>   
+					</select></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-search',plain:true" onclick="cha()">查询</a></td>
+				</tr>
+				
+				<tr>
+					<td>所属组:</td><td><!-- <select  
+					class="easyui-combobox" id="zu" name="dName" editable="false" style="width:165px;">   
+					    <option value="">-请选择-</option>
+					</select> -->
+					<input class="easyui-combobox zu" name="did" data-options="valueField:'id', textField:'text',editable:false,onBeforeLoad:function(){LoadRewardObject();}"/>
+</td>
+					<td>所属公司:</td>
+					<td><input type="text" name="userCompany"></td>
+					<td>注销状态:</td>
+					<td><select class="easyui-combobox" name="state"  editable="false"
+					style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					     <option value="1">启用</option>
+					     <option value="0">注销</option>
+					</select></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-reload',plain:true" onclick="chong()">重置</a></td>
+				</tr>
+			</table>
+		</form>
+		
+</div>
+	
+	
+	<div region="center" border="false">
+		<div id="tb" style="height:auto">
+		<a href="javascript:void(0)" class="easyui-linkbutton" 
+		data-options="iconCls:'icon-add',plain:true" onclick="xianAdd()">增加</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" 
+		data-options="iconCls:'icon-edit',plain:true" onclick="xianUpdate()">编辑</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" 
+		data-options="iconCls:'icon-cancel',plain:true" onclick="removeit()">注销</a>
+		</div>
+		<table id="grid" data-options="toolbar:'#tb',singleSelect:true" class="easyui-datagrid"></table>
+	</div>
+
+   <div id ="wing" class ="easyui-window" 
+    data-options="resizable: false,collapsible:false,maximizable:false,modal:true,minimizable:false,footer:'#an'" title ="修改" style ="width:400px; height:450px;">	
+    <form style ="padding:10px 20px 10px 40px;" id="loginFrom">  
+	<input id="userId" name="userId" type="hidden" />
+	<input id="udid" name="udid" type="hidden"/>
+   		<table  style="padding-top: 5px;">
+			<tr>
+				<td style="width: 250px;">客户编号	：</td>
+				<td style="width: 300px; height: 40px;">
+				<input class="easyui-textbox" id="userCode" name="userCode" data-options="iconCls:'null',showPassword:'none'" > </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">客户姓名：</td>
+				<td style="width: 300px; height: 40px;">
+				<input class="easyui-textbox" id="userName" name="userName" data-options="iconCls:'null',showPassword:'none'" > </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">密码：</td>	 
+				<td style="width: 300px; height: 40px;">
+					<input id="userPwd" name="userPwd" class="easyui-passwordbox"
+					 iconWidth="28" style="width:160px;padding:10px">  </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">性别：</td>
+					<td>
+					      <input type="radio" name="userGender" id="nan" value="1" checked="checked"/>男
+					      <input type="radio" name="userGender" id="nv" value="0" />女
+					</td>
+			</tr>
+				<tr>
+				<td style="width: 250px;">年龄：</td>	 
+				<td style="width: 300px; height: 40px;">
+					<input class="easyui-textbox" id="userAge" name="userAge"> </td>
+			</tr>
+		<tr>
+				<td style="width: 250px;">电话号码：</td>	 
+				<td style="width: 300px; height: 40px;">
+					<input class="easyui-textbox" id="userPhone" name="userPhone"> </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">邮箱：</td>	 
+				<td style="width: 300px; height: 40px;">
+					<input class="easyui-textbox" id="mailbox" name="mailbox"> </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">所属组：	</td>	 
+				<td style="width: 300px; height: 40px;">
+					<input id="did" class="easyui-combobox zu" name="did" data-options="valueField:'id', textField:'text',editable:false,onBeforeLoad:function(){LoadRewardObject();}"/>
+					<!-- <select id="userGroup" name="userGroup" class="easyui-combobox" editable="false" style="width:160px;">   
+					    <option value="0">请选择</option>   
+					    <option value="1">项目组</option>   
+					    <option value="2">经济组</option>   
+					    <option value="无所谓组">无所谓组</option>   
+					</select>  -->
+				</td>
+			</tr>
+		<tr>
+				<td style="width: 250px;">所属公司：</td>	 
+				<td style="width: 300px; height: 40px;">
+					<input class="easyui-textbox" id="userCompany" name="userCompany">
+					</td>
+			</tr>
+		<tr>
+				<td style="width: 250px;">使用状态：</td> 
+				<td>
+				      <input type="radio" name="state" id="yes" value="1" checked="checked"/>正常
+				      <input type="radio" name="state" id="no" value="0" />冻结
+				</td>
+				
+			</tr>
+		</table>
+		<div style ="height: 40px;line-height: 40px;padding-right: 10px;" id="an" align="right">
+			<button id="add" onclick="add()" iconCls='icon-add' class="easyui-linkbutton">添加</button>
+			<button id="update" onclick="update()" iconCls='icon-edit' class="easyui-linkbutton">修改</button>
+		</div>
+	</form>
+   </div>     
+	<div id ="wins" class ="easyui-window"  data-options="modal:true,noheader:true,width:400,height:100,resizable: false">
+		<div id="ep" class="easyui-progressbar" style="width:300px;margin: 35px 0 0 50px;"></div>
+	</div>
+		
+		
+	
+	
+	<script src="../../jquery-easyui-1.5/jquery.min.js"></script>
+	<script src="../../js/normal.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.min.js"></script>
+	<script src="../../jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+	
+	
+	<script type="text/javascript">
+    // 定义列
+    var columns = [[
+        { field: 'userCode', title: '编码', width: 80, align: 'center' },
+        { field: 'userName', title: '姓名', width: 80, align: 'center'},
+        { field: 'userCompany', title: '所属公司', width: 100, align: 'center' },
+        { field: 'dName', title: '所属组', width: 100, align: 'center' },
+        { field: 'userGender',title: '性别',width: 80,align: 'center',
+    		formatter : function(value,row,index){
+    			if(value=='0'){return '女'}  
+    			else if(value=='1'){return '男'}
+    		  } },
+		{ field: 'userAge',title: '年龄',width: 80,align: 'center' },
+		{ field: 'mailbox',title: '邮箱',width: 120,align: 'center' },
+		{ field: 'userPhone',title: '电话号码',width: 80,align: 'center' },
+		{ field: 'state',title: '状态',width: 80,align: 'center',
+     		formatter : function(value,row,index){
+     			if(value=='0'){return '冻结'}  
+     			else if(value=='1'){return '启动'}
+     		  } }
+		]];
+    
+    $(function(){
+		
+		yanzheng();
+    	// 用户管理数据表格
+       cha();
+    });
+	//重置
+	function chong(){
+		$("#form").form("reset");
+	}
+	function LoadRewardObject(){
+		$.post("http://127.0.0.1:8090/departmentAll").always(function(data){
+			
+			var json=JSON.parse(data);
+			var themecombo2=[{"text":"请选择","id":""}];
+			for (let i = 0; i < json.data.length; i++) {
+				themecombo2.push({ "text": json.data[i].dName,"id": json.data[i].did });
+			}
+			$(".zu").combobox("loadData", themecombo2);
+		})
+	}
+	//验证
+	function yanzheng(){
+				 $.extend($.fn.validatebox.defaults.rules, {
+					 remote: {
+						validator: function(value){
+                $.post("http://127.0.0.1:8090/userById",{userCode:value},function(data){
+                   var json=JSON.parse(data);
+				   if (json.data == null) {
+						flag = true;
+				   } else{
+						flag = false;
+				   }
+                });
+
+                return  flag;
+
+            },
+            message: '编号已被占使用'
+
+        }
+				 })
+			$('#wing').panel('close');
+			$('#wins').panel('close');
+			var userCode=$("#userCode");
+			var userName=$("#userName");
+			var userPaw=$("#userPaw");
+			var sex=$("#sex");
+			var age=$("#age");
+			var telephone=$("#telephone");
+			var email=$("#email");
+			var dept=$("#userGroup");
+			var company=$("#company");
+			userCode.textbox({    
+				    required:true,
+					validType:'remote',
+				    missingMessage:'编号不能为空' 
+			})
+			userName.textbox({    
+				    required:true,
+				    missingMessage:'用户不能为空' 
+			})
+			userPaw.passwordbox({    
+				    required:true,
+				    missingMessage:'密码不能为空'
+
+			})
+			sex.textbox({    
+				    required:false,
+				    missingMessage:'性别不能为空' 
+			})
+				age.textbox({    
+				    required:false,
+				    missingMessage:'年龄不能为空' 
+			})
+					telephone.textbox({    
+				    required:false,
+				    missingMessage:'电话不能为空' 
+			})
+						email.textbox({    
+				    required:false,
+				    missingMessage:'邮箱不能为空' 
+			})
+	}
+	
+	//增加
+	function xianAdd(){
+		$("#loginFrom").form("reset");
+		$("#update").css({"display": "none"});
+		$("#add").show();
+		$("#wing").panel({
+			iconCls:'icon-add',
+			height:500, 
+			title: '添加'
+		})
+		$("#yes").attr("checked","checked");
+		$('#wing').panel('open');
+		$('#userCode').textbox('textbox').attr('readonly',false); 
+	}
+	//修改
+	function xianUpdate(){
+		var row = $('#grid').datagrid('getSelected');
+		if (row) {
+			
+				$("#loginFrom").form("reset");
+				$("#add").css({"display": "none"});
+				$("#update").show();
+				$("#wing").panel({
+					iconCls:'icon-edit',
+					height:500, 
+					title: '编辑'
+				})
+				$('#userCode').textbox('textbox').attr('readonly',true); 
+				$.post("http://127.0.0.1:8090/userByCode",{userCode:row.userCode}).always(function(data){
+					
+					$('#wing').panel('open').panel('refresh');
+					
+					var json=JSON.parse(data);
+					$("#userId").val(json.data.userId);
+					$("#udid").val(json.data.udid);
+					 $("#userPwd").passwordbox("setValue",json.data.userPwd);
+					$("#userCode").textbox('setValue',json.data.userCode);
+					$("#userName").textbox('setValue',json.data.userName);
+					$("#userAge").textbox('setValue',json.data.userAge);
+					if(json.data.userGender == 0){
+						$("#nan").removeAttr("checked","checked");
+						$("#nv").attr("checked","checked");
+					}
+					$("#userPhone").textbox('setValue',json.data.userPhone);
+					$("#mailbox").textbox('setValue',json.data.mailbox);
+					$("#userCompany").textbox('setValue',json.data.userCompany);
+					$("#did").combobox('setValue',json.data.did);
+					//$("#userGroup").val(json.data.userGroup);
+					if(json.data.state == 0){
+						$("#yes").removeAttr("checked","checked");
+						$("#no").attr("checked","checked");
+					}
+					
+				})
+			
+		 }else{
+			swal("操作失败！", "请选择一行信息", "error");
+		 }
+	}
+		
+		//点击修改按钮
+		function update(){
+			if(!$("#loginFrom").form('enableValidation').form('validate')){
+			}else{
+				$('#wins').panel('open').panel('refresh');
+				var value = $('#ep').progressbar('getValue');
+				if (value < 100){
+					value += Math.floor(Math.random() * 10);
+					$('#ep').progressbar('setValue', value);
+					setTimeout(arguments.callee, 200);
+				}else if(value == 100){
+					
+					 $.post("http://127.0.0.1:8090/userUpdate",$("#loginFrom").serialize()).always(function(data){
+						
+						if(JSON.parse(data).data == 1){
+							var udid=$("#udid").val();
+							var userid=$("#userId").val();
+							var did=$("#did").textbox('getValue');
+							$.post("http://127.0.0.1:8090/userDeparmentUpdate",{uid:userid,did:did,udid:udid}).always(function(data){
+								alert(udid+"/"+userid+"/"+did);
+								if(JSON.parse(data).data == 1){
+									$('#wins').panel('close');
+									$('#ep').progressbar('setValue',0);
+									$('#wing').panel('close');
+									swal("操作成功!", "修改成功！", "success");
+									cha();
+								}
+							})
+						}else{
+							swal("操作失败!", "系统异常！", "error");
+							$('#wins').panel('close').panel('refresh');
+							$('#ep').progressbar('setValue',0);
+						}
+					})
+					 
+				}
+			}
+		}
+		//点击添加按钮
+		function add(){
+			if(!$("#loginFrom").form('enableValidation').form('validate')){
+			}else{
+				$.post("http://127.0.0.1:8090/userAdd",$("#loginFrom").serialize()).always(function(data){
+					if(JSON.parse(data).data == 1){
+						var userCode=$("#userCode").textbox('getValue');
+						
+						$.post("http://127.0.0.1:8090/userById",{userCode:userCode}).always(function(datas){
+							var json=JSON.parse(datas);
+							if(json.data != null){
+								var did = $("#did").combobox('getValue');
+								var uid = json.data.userId;
+								$.post("http://127.0.0.1:8090/userDeparmentAdd",{uid:uid,did:did}).always(function(datass){
+									if(JSON.parse(datass).data == 1){
+										$('#wing').panel('close');
+										swal("操作成功!", "添加成功！", "success");
+										cha();
+									}
+								})
+							}
+						
+						
+						})
+					}else{
+						swal("操作失败!", "系统异常！", "error");
+					}
+				})
+			}
+		}
+		
+		//删除
+		function removeit(){
+			
+			var row = $('#grid').datagrid('getSelected');
+			if (row) {
+				$.post("http://127.0.0.1:8090/userByCode",{userCode:row.userCode}).always(function(data){
+					if(JSON.parse(data).data.state == 0){ 
+						swal("操作失败！", "不能重复冻结！", "error");
+					}else{
+						swal({
+								title: "您确定要删除吗？",
+								text: "您确定要删除这条数据？",
+								type: "warning",
+								showCancelButton: true,
+								closeOnConfirm: false,
+								confirmButtonText: "是的，我要删除",
+								confirmButtonColor: "#ec6c62"
+							}, function() {
+								
+									$.post("http://127.0.0.1:8090/userDeleteState",{userCode:row.userCode}).always(function(data){
+										alert(data);
+										if(JSON.parse(data).code == 0){ 
+											swal("操作成功!", "已成功删除数据！", "success");
+											cha();
+										}else{
+											swal("操作失败！", "系统异常", "error");
+										}
+										
+									})
+								});
+						
+					}
+					
+				})
+				}else{
+				swal("操作失败！", "请选择一行信息", "error");
+		
+			}
+			}
+			
+			//查询
+			function cha(){
+				$.post("http://127.0.0.1:8090/userAll",$("#form").serialize()).always(function(data){
+					var json=JSON.parse(data);
+					// 用户管理数据表格
+					$('#grid').datagrid({
+					    iconCls: 'icon-forward',
+						singleSelect: true,
+					    fit: true,
+					    border: true,
+					    rownumbers: true,
+						autoRowHeight:false,
+					    striped: true,
+					    pageSize:5,
+					    pageList: [5,10,30, 50, 100],
+					    pagination: true,
+					    //toolbar: toolbar,
+					    //queryParams: {"page":page,"rows":rows},
+					    idField: 'userCode',
+					    remoteSort:false,
+					    multiSort:true,
+						loadFilter:pagerFilter,
+					    columns: columns
+					});
+					if(json.data != null){
+						$("#grid").datagrid("loadData",json.data);
+					}else{
+						$('#grid').datagrid('loadData', { total: 0, rows: [] });  
+					}
+					
+				})
+			}
+			
+			
+			//分页拦截器函数 完整的数据进入,分页处理后,输出数据.
+				
+			function pagerFilter(data){
+				
+				if(data == undefined){
+					alert(data);
+					data = {
+					    total: 0
+					}
+					
+			}else{
+			    if (typeof data.length == 'number' && typeof data.splice == 'function'){    // 判断数据是否是数组
+			        data = {
+			            total: data.length,
+			            rows: data
+			        }
+			    }
+			    var dg = $(this);
+			    var opts = dg.datagrid('options');
+			    var pager = dg.datagrid('getPager');
+			    pager.pagination({
+			        onSelectPage:function(pageNum, pageSize){
+			            opts.pageNumber = pageNum;
+			            opts.pageSize = pageSize;
+			            pager.pagination('refresh',{
+			                pageNumber:pageNum,
+			                pageSize:pageSize
+			            });
+			            dg.datagrid('loadData',data);
+			        }
+			    });
+			    if (!data.originalRows){
+			        data.originalRows = (data.rows);
+			    }
+			    var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+			    var end = start + parseInt(opts.pageSize);
+			    data.rows = (data.originalRows.slice(start, end));
+			    
+			}
+			return data;
+			}
+	</script>
+	</body>
+</html>

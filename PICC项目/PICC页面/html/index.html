@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>首页</title>
+		<link rel="stylesheet" href="../css/sweetalert.css" />
+		<link rel="stylesheet" href="../jquery-easyui-1.5/themes/default/easyui.css" />
+        <link rel="stylesheet" href="../jquery-easyui-1.5/themes/icon.css" />
+       <style>
+		  article, aside, figure, footer, header, hgroup, 
+		  menu, nav, section { display: block; }
+		  .west{
+			width:200px;
+			padding:10px;
+		  }
+		  .north{
+			height:30px;
+		  }
+		.icon-index{
+			background:url(../icons/5.gif) no-repeat center center;
+		}
+		.icon-huisuo{
+			background:url(../icons/6.gif) no-repeat center center;
+		}
+		.icon-shuaxin{
+			background:url(../icons/1.gif) no-repeat center center;
+		}
+		.icon-hongcha{
+			background:url(../icons/2.gif) no-repeat center center;
+		}
+		#tubiao1{
+			
+		   background-image:url(../icons/4.gif);
+		   background-repeat:no-repeat;
+		   width: 20px;
+		   padding-left:20px;
+			margin-bottom: 20px;
+		} 
+		#mmFrom tr{
+			height: 50px;
+		}
+	</style>
+	</head>
+	<body class="easyui-layout">
+		
+
+ <div region="north" split="false" border="false" style="overflow: hidden; height: 30px;
+        background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
+        line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体;padding: 10px;height: 50px;">
+	<span style="float:right; padding-right:20px;font-size: 15px;" class="head">
+		<span id="tubiao1"></span>欢迎回家,<span id="userName"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span id="updateMM" onclick="xian()">修改密码</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<span onclick="loginOut()">安全退出</span>
+	</span>
+	<div onclick="loginOut()" style=" position: absolute;right: 93px;top: 12px;"><img src="../icons/2.gif"></div>
+	<div onclick="xian()" style=" position: absolute;right: 187px;top: 12px;"><img src="../icons/3.gif"></div>
+	<span style="padding-left:10px; font-size: 18px; ">
+		欢迎使用增值服务预约操作系统
+	</span>
+	 </div>
+ 
+  <div region="center">
+    <div class="easyui-tabs" fit="true" border="false" id="tabs">
+		
+      <div title="首页" iconCls="icon-index" id="index-shuo">
+		  <strong style="margin: 30px;font-size: 24px;line-height: 50px;">欢迎使用增值服务预约操作系统</strong>
+	  </div> 
+    </div>
+  </div>
+  <div region="west" class="west" title="菜单" >
+    <ul id="tree" class=" easyui-tree"></ul>
+  </div>
+
+  
+  <div id="tabsMenu" class="easyui-menu" style="width:120px;">  
+    <div name="close">关闭</div>  
+    <div name="Other">关闭其他</div>  
+    <div name="All">关闭所有</div>
+  </div>
+		
+		
+		<!-- 修改密码面板 -->
+		<div id ="win" class ="easyui-window"  data-options="collapsible:false,maximizable:false,modal:false,footer:'#ft',width:400,height:350,resizable: false,minimizable:false" title ="修改密码">
+			<form style ="padding:10px 20px 10px 40px;font-weight:bold;font-size: 18px;" id="mmFrom" action="#">  
+				<input type="hidden" id="paw">
+				<table>
+					<tr>
+						<td>登陆编号:</td><td><span id="bianhao"></span></td>
+					</tr>
+					<tr>
+						<td>原密码：</td><td><input class="easyui-passwordbox" prompt="输入原先的密码" iconWidth="28" style="width:200px;height:34px;padding:10px" id="oldPaw"  required="required" validType="equals['#paw']"></td>
+					</tr>
+					<tr>
+						<td>新密码：</td><td><input class="easyui-passwordbox" prompt="请输入新的密码"  iconWidth="28" style="width:200px;height:34px;padding:10px" id="newPaw"></td>
+					</tr>
+					<tr>
+						<td>重复密码：</td><td>
+						<input class="easyui-passwordbox" required="required" validType="equals['#newPaw']" prompt="请输入新的密码" 
+						iconWidth="28" style="width:200px;height:34px;padding:10px" 
+						id="newPaws"></td>
+					</tr>
+					
+				</table>
+				
+				<div  id="ft" align="right" style="padding: 10px;">
+					<!-- <input type="submit" class="easyui-linkbutton" icon="icon-ok" value="登录"> -->
+					<button onclick="tijiao()">确定</button>
+					
+				</div>
+			</form>
+		</div>
+	 <div data-options="region:'south'" align="center" style="line-height: 28px;height: 30px;background-color: #00B83F;">南部区域</div>	
+		<script src="../jquery-easyui-1.5/jquery.min.js"></script>
+		<script src="../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../jquery-easyui-1.5/jquery.easyui.min.js"></script>
+		<script src="../jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+		<script src="../jquery-easyui-1.5/jquery.easyui.mobile.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script type="text/javascript">
+			 $(function(){
+				 //选项卡右侧图标
+				 $('#tabs').tabs({
+					tools:[{
+					iconCls:'icon-index',
+					handler:function(){
+						$('#tabs').tabs('select','首页');
+					}
+				},{
+					iconCls:'icon-shuaxin',
+					handler:function(){
+						  var currTab =  self.parent.$('#tabs').tabs('getSelected'); //获得当前tab
+							var url = $(currTab.panel('options').content).attr('src');
+							self.parent.$('#tabs').tabs('update', {
+							  tab : currTab,
+							  options : {
+							   content : '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>'
+		 
+							  }
+							 });
+						// location.reload();
+					}
+				},{
+					iconCls:'icon-hongcha',
+					handler:function(){
+						closeAll();
+					}
+				}]
+			});
+				 
+				 //调用验证密码框方法
+				 mmk();
+				 
+				 //首页加载时关闭密码弹框
+				 $('#win').panel('close').panel('refresh');
+				
+				 //验证用户名密码是否保存在cookie
+				 var userName= $.cookie('userName');
+				if(userName == null || userName == "null"){
+					location.href="401.html";
+				}else{
+					$("#userName").text(userName);
+					$("#bianhao").text($.cookie('userCode'));
+				} 
+				
+		//动态菜单数据 
+		$.post("http://127.0.0.1:8090/shu",{rid:$.cookie('rid')}).always(function(date){
+			//实例化树形菜单 
+			$("#tree").tree({ 
+				data : JSON.parse(date), 
+				/* lines : true, */
+				onClick : function (node) { 
+					if (node.attributes) { 
+						Open(node.text, node.attributes.url); 
+					} 
+				} 
+			}); 
+		});
+			
+		});
+		
+			//验证密码框
+			function mmk(){
+				
+				 //验证文本框密码是否相同
+				 $.extend($.fn.validatebox.defaults.rules, {
+				 	equal: {    
+				     validator: function(value){ 
+				         return value == $.cookie('userPwd');    
+				     },    
+				     message: '原密码不正确'   
+				 },
+				 equals: {    
+				    validator: function(value,param){    
+				        return value == $(param[0]).val();    
+				    },    
+				    message: '两次新密码不相同'   
+				}
+				 })
+				 
+				var oldPaw= $("#oldPaw");
+				var newPaw= $("#newPaw");
+				var newPaws= $("#newPaws");
+				oldPaw.passwordbox({    
+					    required:true,
+						validType:"equal"
+					    
+					    
+				})
+				newPaw.passwordbox({      
+						    required:true,
+						    missingMessage:'新密码不能为空'
+						    
+						})
+				newPaws.validatebox({      
+						     required:true
+						    
+						})
+			}
+			
+			//在右边center区域打开菜单，新增tab 
+			function Open(text, url) { 
+				var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>'; 
+		 
+				if ($("#tabs").tabs('exists', text)) { 
+					$('#tabs').tabs('select', text); 
+				} else { 
+					$('#tabs').tabs('add', { 
+						title : text, 
+						closable : true,
+						 iconCls:"icon-huisuo",
+						content : content 
+					}); 
+				} 
+			} 
+		 
+			//绑定tabs的右键菜单 
+			$("#tabs").tabs({ 
+				onContextMenu : function (e, title) { 
+					e.preventDefault(); 
+					if(title != "首页"){
+						$('#tabsMenu').menu('show', { 
+							left : e.pageX, 
+							top : e.pageY 
+						}).data("tabTitle", title); 
+					}
+					
+				} 
+			}); 
+		 
+			//实例化menu的onClick事件 
+			$("#tabsMenu").menu({ 
+				onClick : function (item) { 
+					CloseTab(this, item.name); 
+				} 
+			}); 
+		 
+			//几个关闭事件的实现 
+			function CloseTab(menu, type) { 
+				var curTabTitle = $(menu).data("tabTitle"); 
+				var tabs = $("#tabs"); 
+		 
+				if (type === "close") { 
+					tabs.tabs("close", curTabTitle); 
+					return; 
+				} 
+		 
+				var allTabs = tabs.tabs("tabs"); 
+				var closeTabsTitle = []; 
+		 
+				$.each(allTabs, function () { 
+					var opt = $(this).panel("options"); 
+					if (opt.closable && opt.title != curTabTitle && type === "Other") { 
+						closeTabsTitle.push(opt.title); 
+					} else if (opt.closable && type === "All") { 
+						closeTabsTitle.push(opt.title); 
+					} 
+				}); 
+		 
+				for (var i = 0; i < closeTabsTitle.length; i++) { 
+					tabs.tabs("close", closeTabsTitle[i]); 
+				} 
+			} 
+			
+			//所有可关闭的选项卡
+			function closeAll() {
+					$(".tabs li").each(function(index, obj) {
+						  //获取所有可关闭的选项卡
+						  var tab = $(".tabs-closable", this).text();
+						  $(".easyui-tabs").tabs('close', tab);
+					});
+					/* $("#close").remove();//同一时候把此button关闭 */
+				}
+		
+
+			//退出程序
+			function loginOut(){
+				swal({
+					title: "您确定退出程序吗？",
+					text: "您确定要退出本系统吗？",
+					type: "warning",
+					showCancelButton: true,
+					closeOnConfirm: false,
+					confirmButtonText: "是的，我要退出",
+					confirmButtonColor: "#ec6c62"
+				}, function() {
+					 location.href="login.html?tui=1";
+					});
+			}
+				
+				// 打开面板且刷新其内容。
+			function xian(){
+					$("#mmFrom").form("reset");
+					$('#win').panel('open').panel('refresh');
+										 
+				}	 
+				
+				//密码框提交
+			function tijiao(){
+			if(!$("#mmFrom").form('enableValidation').form('validate')){
+			}else{
+				$.post("http://127.0.0.1:8090/updateUserPwd",{userPwd:$("#newPaw").val(),userCode:$.cookie('userCode')}).always(function(data){
+					
+					if(JSON.parse(data).code==0){
+						swal({title: "操作成功!",
+								text: "修改密码成功,请重新登陆！",
+								type: "success"},
+						function(){location.href="login.html?tui=1";});
+					}else{
+						swal({title: "操作失败!",
+								text: "出现异常了！",
+								type: "error"},
+						function(){$('#win').panel('close').panel('refresh');});
+					}
+				})
+				
+			}
+		}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>代检车业务管理</title>
+	</head>
+	<style>
+		td{
+			font-size: 14px;
+		}
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+
+.badge {
+		  display: inline-block;
+		  min-width: 7px;
+		  padding: 3px 5px;
+		  font-size: 8px;
+		  font-weight: bold;
+		  line-height: 1;
+		  color: #fff;
+		  text-align: center;
+		  white-space: nowrap;
+		  vertical-align: middle;
+		  background-color: #777;
+		  border-radius: 18px;
+		}
+	</style>
+	<link rel="stylesheet" href="../../css/sweetalert.css" />
+	<link rel="stylesheet" href="../../jquery-easyui-1.5/themes/default/easyui.css">
+	<link rel="stylesheet"  href="../../jquery-easyui-1.5/themes/icon.css">
+	<body class="easyui-layout">
+		<div region="north">
+		<form id="form">
+			<table>
+				<tr id="c">
+					<td>客户姓名:</td><td><input class="easyui-textbox" name="customerName"  style="width:165px"></td>
+					<td>业务编码:</td><td><input class="easyui-textbox" name="msId" style="width:165px"></td>
+					<td>车牌号:</td><td><input class="easyui-textbox"  name="licensePlate" style="width:165px"></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true" onclick="chong()" >重置</a></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true" onclick="cha()">查询</a></td>
+				</tr>
+				
+				<tr>
+					<td>是否提交:</td>
+					<td><select id="cc" editable="false"
+					class="easyui-combobox" name="submission" style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="1">已提交</option>   
+					    <option value="0">未提交</option>   
+					</select></td>
+					<td>注销状态:</td>
+					<td><select id="zhengTai" editable="false"
+					 class="easyui-combobox" name="state" style="width:165px;">   
+					   <option  value="">-请选择-</option>   
+					    <option value="1">启用</option>   
+					    <option value="0">注销</option>   
+					    <option value="2">完成</option> 
+					    <option value="3">异常</option> 
+					</select></td>
+					
+				</tr>
+			</table>
+		</form>
+		
+</div>
+	
+		<div region="center" border="false">
+		<div id="tb" style="height:auto">
+			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="xianAdd()">增加</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true" onclick="xianUpdate()">编辑</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-cancel',plain:true" onclick="removeit()">删除</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" 
+		data-options="iconCls:'icon-add',plain:true" onclick="caoGao()">草稿箱
+		<span class="badge" style="background-color: crimson;" id="caoGao"></span></a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" onclick="boHui()">驳回箱
+		<span class="badge" style="background-color: crimson;" id="boHui"></span></a>
+		</div>
+		<table id="grid" data-options="toolbar: '#tb',singleSelect: true" class="easyui-datagrid">
+		</table>        
+		
+	
+	
+</div>
+
+
+	<div id ="win" class ="easyui-window"  data-options="collapsible:false,maximizable:false,modal:true,minimizable:false,resizable: false,footer:'#an',width:400,height:350,title:'修改'">
+	<form style ="padding:10px 20px 10px 40px;" id="loginFrom" action="#">  
+		<table  style="padding-top: 5px;">
+			<input name="msId" id="msId" type="hidden" />
+			<input name="userId" id="userId" type="hidden" />
+			<tr>
+				<td style="width: 250px;">客户姓名：</td>
+				<td style="width: 300px; height: 40px;">
+				<input class="easyui-textbox" id="customerName" name="customerName"> </td>
+			</tr>
+		<tr>
+				<td style="width: 250px;">电话号码：</td>	
+				<td style="width: 300px; height: 40px;"><input class="easyui-textbox" id="telephone" name="telephone"> </td>
+			</tr><tr>
+				<td style="width: 250px;">所在公司：</td>
+				<td style="width: 300px; height: 40px;"><input class="easyui-textbox" id="company" name="company"> </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">车型：</td>
+				<td style="width: 300px; height: 40px;"><input class="easyui-textbox" id="vehicleType" name="vehicleType"> </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">车牌号：</td>
+				<td style="width: 300px; height: 40px;"><input class="easyui-textbox" id="licensePlate" name="licensePlate"> </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">较强保单号：</td>
+				<td style="width: 300px; height: 40px;"><input class="easyui-textbox" id="strengthPolicy" name="strengthPolicy"> </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">检测站名称：</td>
+				<td style="width: 300px; height: 40px;"><input class="easyui-textbox" id="testingName" name="testingName"> </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">预约时间：</td> 
+
+				<td style="width: 300px; height: 40px;">
+					<input class="easyui-datetimebox" id="scheduledTime" name="scheduledTime"
+					 editable="false"> </td>
+			</tr>
+			<tr>
+					<input type="hidden" name="submission" id="no" value="0">
+			
+		</table>
+		
+		<div style ="height: 40px;line-height: 40px;padding-right: 10px;" id="an" align="right">
+			<button id="add" onclick="add()" iconCls='icon-add' class="easyui-linkbutton">提交</button>
+			<button id="add1" onclick="add1()" iconCls='icon-add' class="easyui-linkbutton">添加</button>
+			<button id="update" onclick="update()" iconCls='icon-edit' class="easyui-linkbutton">提交</button>
+		</div>
+	</form>
+</div>   
+
+	<script src="../../jquery-easyui-1.5/jquery.min.js"></script>
+	<script src="../../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/moment.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.min.js"></script>
+	<script src="../../jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.mobile.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	
+	<script type="text/javascript">
+    // 定义列
+    var columns = [[
+        { field: 'msId', title: '业务编码', width: 80, align: 'center' },
+        { field: 'userName', title: '录入人', width: 80, align: 'center'},
+        { field: 'company', title: '所属公司', width: 100, align: 'center' },
+        { field: 'customerName', title: '客户姓名', width: 100, align: 'center' },
+        { field: 'telephone',title: '电话号码',width: 80,align: 'center' },
+    	{ field: 'vehicleType',title: '车型',width: 80,align: 'center' },
+    	{ field: 'licensePlate',title: '车牌号',width: 80,align: 'center' },
+    	{ field: 'strengthPolicy',title: '交强保单号',width: 80,align: 'center' },
+    	{ field: 'testingName',title: '检测站名称',width: 80,align: 'center' },
+    	{ field: 'scheduledTime',title: '预定时间',width: 80,align: 'center' },
+    	{ field: 'reject',title: '是否驳回',width: 80,align: 'center' ,
+    	formatter : function(value,row,index){
+                    if(value=='0'){return '未驳回'}  
+                    else if(value=='1'){return '已驳回'}
+                  } },
+    	{ field: 'approval',title: '是否审批',width: 80,align: 'center' ,
+    		formatter : function(value,row,index){
+                    if(value=='0'){return '未审批'}  
+                    else if(value=='1'){return '已审批'}
+                  } },
+    	{ field: 'submission',title: '是否提交',width: 80,align: 'center' ,
+    	formatter : function(value,row,index){
+                    if(value=='1'){return '已提交'}  
+                    else if(value=='0'){return '未提交'}
+                  } },
+    	{field: 'handle',title: '是否处理',width: 80,align: 'center' ,
+    	formatter : function(value,row,index){
+                    if(value=='1'){return '已处理'}  
+                    else if(value=='0'){return '未处理'}
+                  } },
+    	{field: 'state',title: '状态',width: 80,align: 'center' ,
+    	formatter : function(value,row,index){
+                     if(value=='1'){return '启用'}  
+			        else if(value=='0'){return '注销'}
+					else if(value=='2'){return '完成'}
+					else if(value=='3'){return '异常'}
+                  }},
+    	]];
+    $(function(){
+    	
+		yanzheng();
+		
+    	// 用户管理数据表格
+        cha();
+        $('#win').panel('close').panel('refresh');
+          
+    });
+	
+		//草稿箱
+	function caoGao(){
+		$.post("http://127.0.0.1:8090/jianchecaoGaoCount").always(function(data){
+			var json=JSON.parse(data);
+			if(json.data == 0){
+					swal("操作失败！", "草稿箱没有信息", "error");
+			}else{
+				$.post("http://127.0.0.1:8090/jianchecaogaoAll",$("#form").serialize()).always(function(data){
+			var json=JSON.parse(data);
+			// 用户管理数据表格
+			$('#grid').datagrid({
+			    iconCls: 'icon-forward',
+			    fit: true,
+			    border: true,
+			    rownumbers: true,
+			    striped: true,
+			    pageSize:5,
+			    pageList: [5,10,30, 50, 100],
+			    pagination: true,
+				idField: 'msId',
+				remoteSort:false,
+				multiSort:true,
+			    //toolbar: toolbar,
+			    //queryParams: {"page":page,"rows":rows},
+				loadFilter:pagerFilter,
+			    columns: columns
+			});
+			if(json.data != null){
+				$("#grid").datagrid("loadData",json.data);
+			}else{
+				$('#grid').datagrid('loadData', { total: 0, rows: [] });  
+			}
+		})
+			}
+	})
+	}
+	//驳回箱
+	function boHui(){
+		$.post("http://127.0.0.1:8090/jianchebhCount").always(function(data){
+			var json=JSON.parse(data);
+			if(json.data == 0){
+					swal("操作失败！", "草稿箱没有信息", "error");
+			}else{
+				$.post("http://127.0.0.1:8090/jianchebhAll",$("#form").serialize()).always(function(data){
+					alert(data);
+			var json=JSON.parse(data);
+			// 用户管理数据表格
+			$('#grid').datagrid({
+			    iconCls: 'icon-forward',
+			    fit: true,
+			    border: true,
+			    rownumbers: true,
+			    striped: true,
+			    pageSize:5,
+			    pageList: [5,10,30, 50, 100],
+			    pagination: true,
+				idField: 'msId',
+				remoteSort:false,
+				multiSort:true,
+			    //toolbar: toolbar,
+			    //queryParams: {"page":page,"rows":rows},
+				loadFilter:pagerFilter,
+			    columns: columns
+			});
+			$("#grid").datagrid("loadData",json.data);
+		})
+			}
+	})
+	}
+	//表单验证
+	function yanzheng(){
+		$('#win').panel('close').panel('refresh');
+		
+			//验证函数
+			$.extend($.fn.validatebox.defaults.rules, {
+				csqn: {
+					validator: function (value) {
+					var now = new Date();
+					var date=moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
+					if (date <= value) {
+						return true;
+					}else{
+						return false;
+					}
+					},
+					message: '预订日期必须大于等于当前日期'
+					},
+					phoneNum: { //验证手机号   
+			
+				        validator: function(value, param){ 
+			
+				         return /^1[3-8]+\d{9}$/.test(value);
+			
+				        },    
+			
+				        message: '请输入正确的手机号码。'   
+			
+				    }
+			})
+		
+		var vehicleType=$("#vehicleType");
+			var customerName=$("#customerName");
+			var telephone=$("#telephone");
+			var licensePlate=$("#licensePlate");
+			var strengthPolicy=$("#strengthPolicy");
+			var testingName=$("#testingName");
+			var scheduledTime=$("#scheduledTime");
+			var shifotijiao=$("#shifotijiao");
+			
+			customerName.textbox({    
+				    required:false,
+				    missingMessage:'用户不能为空' 
+			})
+			telephone.textbox({    
+				    required:false/* ,
+					validType:'phoneNum' */
+			})
+			licensePlate.textbox({    
+				    required:true,
+				    missingMessage:'车牌号不能为空' 
+			})
+				vehicleType.textbox({    
+				    required:false,
+				    missingMessage:'车型不能为空' 
+			})
+					strengthPolicy.textbox({    
+				    required:false,
+				    missingMessage:'较强表单号不能为空' 
+			})
+						testingName.textbox({    
+				    required:false,
+				    missingMessage:'监测站不能为空' 
+			})
+			scheduledTime.textbox({  
+				    required:false,
+					/* ,
+					validType:'csqn' */
+			})
+	}
+	//重置
+	function chong(){
+		$("#form").form("reset");
+	}
+	//增加
+		function xianAdd(){
+			$("#update").css({"display": "none"});
+			$("#add").show();
+			$("#win").panel({
+				iconCls:'icon-add',
+				height:500, 
+				title: '添加'
+			})
+			$("#loginFrom").form("reset");
+			$('#win').panel('open');
+			alert($.cookie("uid"));
+			$("#userId").val($.cookie("uid"));
+			
+			$("#bianHao").hide();
+		}
+		//点击添加中提交按钮
+			function addti(){
+				if(!$("#loginFrom").form('enableValidation').form('validate')){
+				}else{
+					$("#submission").val("0");
+					$.post("http://127.0.0.1:12306/designatedAdd",$("#loginFrom").serialize()).always(function(data){
+						alert(data);
+						if(JSON.parse(data).data == 1){
+							$('#win').panel('close');
+							swal("操作成功!", "添加成功！", "success");
+							}else{
+							swal("操作失败!", "系统异常！", "error");
+						}
+					})
+					
+				}
+			}
+		
+			//点击添加按钮
+			function add(){
+				if(!$("#loginFrom").form('enableValidation').form('validate')){
+				}else{
+					$("#no").val("1");
+					$.post("http://127.0.0.1:8090/jiancheAdd",$("#loginFrom").serialize()).always(function(data){
+						alert($("#loginFrom").serialize());
+						if(JSON.parse(data).data == 1){
+							$('#win').panel('close');
+							swal("操作成功!", "添加成功！", "success");
+							cha();
+						}else{
+							swal("操作失败!", "系统异常！", "error");
+						}
+					})
+					
+				}
+			}	//点击添加按钮
+			function add1(){
+				if(!$("#loginFrom").form('enableValidation').form('validate')){
+				}else{
+					$("#no").val("0");
+					$.post("http://127.0.0.1:8090/jiancheAdd",$("#loginFrom").serialize()).always(function(data){
+						alert($("#loginFrom").serialize());
+						if(JSON.parse(data).data == 1){
+							$('#win').panel('close');
+							swal("操作成功!", "添加成功！", "success");
+							cha();
+						}else{
+							swal("操作失败!", "系统异常！", "error");
+						}
+					})
+					
+				}
+			}
+			function row(){
+		//草稿箱行数
+		$.post("http://127.0.0.1:8090/jianchecaoGaoCount").always(function(data){
+			var json=JSON.parse(data);
+			$("#caoGao").text(json.data);
+			if(json.data == 0){
+				$("#caoGao").hide();
+				
+			}
+		})
+		//驳回箱行数
+		$.post("http://127.0.0.1:8090/jianchebhCount").always(function(data){
+			var json=JSON.parse(data);
+			$("#boHui").text(json.data);
+			if(json.data == 0){
+				$("#caoGao").hide();
+				
+			}
+		})
+	}
+	
+			//删除
+				function removeit(){
+					var row = $('#grid').datagrid('getSelected');
+					if (row) {
+						$.post("http://127.0.0.1:8090/jiancheById",{msId:row.msId}).always(function(dataId){
+							 var json=JSON.parse(dataId);
+							if(json.data.state == 1 && json.data.submission == 0){
+								swal({
+									title: "您确定要删除吗？",
+									text: "您确定要删除这条数据？",
+									type: "warning",
+									showCancelButton: true,
+									closeOnConfirm: false,
+									confirmButtonText: "是的，我要删除",
+									confirmButtonColor: "#ec6c62"
+								}, function() {
+								
+										$.post("http://127.0.0.1:8090/jiancheDelete",{msId:row.msId}).always(function(data){
+											alert(data);
+											if(JSON.parse(data).code==0){
+												swal("操作成功!", "已成功删除数据！", "success");
+												cha();
+											}else{
+												swal("操作失败!", "系统异常！", "error");
+											}
+											
+										})
+									
+								
+							
+							});
+							}else{
+									swal("操作失败！", "此数据已注销或已提交不能注销", "error");
+								}
+							})
+					}else{
+						swal("操作失败！", "请选择一行信息", "error");
+		
+					}
+					
+				}
+			
+			//提交按钮
+			function tijiao(){
+				var row = $('#grid').datagrid('getSelected');
+				
+				if (row) {
+					swal("操作成功!", "提交成功！", "success");
+				 }else{
+					 swal("操作失败！", "请选择一行信息", "error");
+				 }
+			}
+			
+			//查询
+			function cha(){
+		$.post("http://127.0.0.1:8090/SubstitutevehicleAll",$("#form").serialize()).always(function(data){
+			var json=JSON.parse(data);
+			
+			// 用户管理数据表格
+			$('#grid').datagrid({
+			    iconCls: 'icon-forward',
+			    fit: true,
+			    border: true,
+			    rownumbers: true,
+			    striped: true,
+			    pageSize:5,
+			    pageList: [5,10,30, 50, 100],
+			    pagination: true,
+				idField: 'msId',
+				remoteSort:false,
+				multiSort:true,
+			    //toolbar: toolbar,
+			    //queryParams: {"page":page,"rows":rows},
+				loadFilter:pagerFilter,
+			    columns: columns
+			});
+			if(json.data != null){
+				$("#grid").datagrid("loadData",json.data);
+			}else{
+				$('#grid').datagrid('loadData', { total: 0, rows: [] });  
+			}
+		})
+		row();
+	}
+			
+			//修改
+		function xianUpdate(){
+			var row = $('#grid').datagrid('getSelected');
+			if (row) { 
+				var businessCoding=row.msId;
+				$.post("http://127.0.0.1:8090/jiancheById",{msId:businessCoding}).always(function(data){
+					
+					var json=JSON.parse(data);
+					
+					if(json.data != null){
+						if(json.data.submission != 1){
+							$("#loginFrom").form("reset");
+							$("#add").css({"display": "none"});
+							$("#add1").css({"display": "none"});
+							$("#update").show();
+							$("#win").panel({
+								iconCls:'icon-edit',
+								height:500, 
+								title: '编辑'
+							})
+							$("#bianHao").show();
+							$('#win').panel('open').panel('refresh');
+							$("#msId").textbox('setValue',json.data.msId);
+							$("#company").textbox('setValue',json.data.company);
+							$("#customerName").textbox('setValue',json.data.customerName);
+							$("#telephone").textbox('setValue',json.data.telephone);
+							$("#vehicleType").textbox('setValue',json.data.vehicleType);
+							$("#licensePlate").textbox('setValue',json.data.licensePlate);
+							$("#strengthPolicy").textbox('setValue',json.data.strengthPolicy);
+							$("#testingName").textbox('setValue',json.data.testingName);
+							$("#scheduledTime").textbox('setValue',json.data.scheduledTime);
+							if(json.data.plateColor == 1){
+								$("#lv").removeAttr("checked","checked");
+								$("#huang").removeAttr("checked","checked");
+								$("#lan").attr("checked","checked");
+							}else if(json.data.plateColor == 2){
+								$("#lv").attr("checked","checked");
+								$("#huang").removeAttr("checked","checked");
+								$("#lan").removeAttr("checked","checked");
+								
+							}else if(json.data.plateColor == 3){
+								$("#huang").attr("checked","checked");
+								$("#lan").removeAttr("checked","checked");
+								$("#lv").removeAttr("checked","checked");
+							}
+							
+							if(json.data.threeInOne == 1){
+								$("#no").removeAttr("checked","checked");
+								$("#yes").attr("checked","checked");
+							}else if(json.data.threeInOne == 0){
+								$("#no").attr("checked","checked");
+							}
+							
+						}else{
+							swal("操作失败！", "此账单已提交，不能重复提交", "error");
+						}
+					
+					}
+				})
+				$("#msId").textbox({readonly:false});
+			 }else{
+				swal("操作失败！", "请选择一行信息", "error");
+			 }
+		}
+		
+			
+			//点击修改按钮
+			function update(){
+				if(!$("#loginFrom").form('enableValidation').form('validate')){
+				}else{
+					
+					$("#no").val("1");
+					$.post("http://127.0.0.1:8090/jiancheUpdate",$("#loginFrom").serialize()).always(function(data){
+						alert(data);
+						if(JSON.parse(data).code==0){
+							$('#win').panel('close');
+							swal("操作成功!", "修改成功！", "success");
+							cha();
+						}else{
+							swal("操作失败!", "系统异常！", "error");
+						}
+					})
+						
+					
+				}
+			}
+			
+			
+			//分页拦截器函数 完整的数据进入,分页处理后,输出数据.
+				
+			function pagerFilter(data){
+			    if (typeof data.length == 'number' && typeof data.splice == 'function'){    // 判断数据是否是数组
+			        data = {
+			            total: data.length,
+			            rows: data
+			        }
+			    }
+			    var dg = $(this);
+			    var opts = dg.datagrid('options');
+			    var pager = dg.datagrid('getPager');
+			    pager.pagination({
+			        onSelectPage:function(pageNum, pageSize){
+			            opts.pageNumber = pageNum;
+			            opts.pageSize = pageSize;
+			            pager.pagination('refresh',{
+			                pageNumber:pageNum,
+			                pageSize:pageSize
+			            });
+			            dg.datagrid('loadData',data);
+			        }
+			    });
+			    if (!data.originalRows){
+			        data.originalRows = (data.rows);
+			    }
+			    var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+			    var end = start + parseInt(opts.pageSize);
+			    data.rows = (data.originalRows.slice(start, end));
+			    return data;
+			}
+	</script>
+	</body>
+</html>

@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>酒后代驾业务管理</title>
+	</head>
+	<style>
+		td{
+			font-size: 14px;
+		}
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+
+	</style>
+	<link rel="stylesheet" href="../../css/sweetalert.css" />
+	<link rel="stylesheet" href="../../jquery-easyui-1.5/themes/default/easyui.css">
+	<link rel="stylesheet"  href="../../jquery-easyui-1.5/themes/icon.css">
+	<body class="easyui-layout">
+		<div region="north">
+		<form id="form">
+					<input type="hidden" name="page" id="page" value="">
+					<input type="hidden" name="rows" id="rows" value="">
+			<table>
+				<tr id="c">
+					<td>客户姓名:</td><td><input class="easyui-textbox"  style="width:165px" name="customerName"></td>
+					<td>业务编码:</td><td><input class="easyui-textbox"  style="width:165px" name="dgId"></td>
+					<td>车牌号:</td><td><input class="easyui-textbox"  style="width:165px" name="licensePlate"></td>
+				</tr>
+				
+				<tr>
+					<td>是否三合一录入:</td>
+					<td><select editable="false" name="threeInOne"
+					 class="easyui-combobox" style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="1">是</option>   
+					    <option value="0">否</option>   
+					</select></td>
+					<td>点卡消费类型:</td>
+					<td><select editable="false" name="clickType"
+					 class="easyui-combobox"  style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="1">是</option>   
+					    <option value="0">否</option>   
+					</select></td>
+						<td>是否提交:</td>
+							<td><select editable="false" name="submission"
+							 class="easyui-combobox"  style="width:165px;">   
+						    <option value="">-请选择-</option>   
+						    <option value="1">是</option>   
+						    <option value="0">否</option>   
+						</select></td>
+						<td>注销状态:</td>
+						<td><select editable="false" name="state"
+						 class="easyui-combobox"  style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="1">是</option>   
+					    <option value="0">否</option>   
+					</select></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-search',plain:true" onclick="cha()">查询</a></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-reload',plain:true" onclick="chong()">重置</a></td>
+				</tr>
+			</table>
+		</form>
+		
+</div>
+	
+
+		<div region="center" border="false">
+		<div id="tb" style="height:auto">
+		<a href="javascript:void(0)" class="easyui-linkbutton" 
+		data-options="iconCls:'icon-add',plain:true" onclick="xianAdd()">添加</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" 
+		data-options="iconCls:'icon-edit',plain:true" onclick="xianUpdate()">编辑</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" 
+		data-options="iconCls:'icon-cancel',plain:true" onclick="removeit()">注销</a>
+		</div>
+		<table id="grid" data-options="toolbar: '#tb',singleSelect: true" class="easyui-datagrid">
+		</table>        
+		
+	
+	
+</div>
+
+<div id ="win" class ="easyui-window" 
+ data-options="resizable: false,collapsible:false,maximizable:false,modal:true,minimizable:false,footer:'#an'" title ="修改" style ="width:400px; height:450px;">	
+ <form style ="padding:10px 20px 10px 40px;" id="loginFrom" action="#">  
+		<table  style="padding-top: 5px;">
+			<input type="hidden" id="dgId" name="dgId">
+			<input type="hidden" id="submission" name="submission" value="0"/>
+			<input type="hidden" id="userId" name="userId" />
+			<tr>
+				<td style="width: 250px;">客户姓名：</td>
+				<td style="width: 300px; height: 40px;">
+				<input class="easyui-textbox" id="customerName" name="customerName" data-options="iconCls:'null',showPassword:'none'" > </td>
+			</tr>
+		<tr>
+				<td style="width: 250px;">电话号码：</td>	 
+				<td style="width: 300px; height: 40px;"><input class="easyui-textbox" id="telephone" name="telephone"> </td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">所在地：</td>
+				<td style="width: 300px; height: 40px;">
+					<input class="easyui-textbox" id="location" name="location"> 
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">目的地：</td>
+				<td style="width: 300px; height: 40px;">
+					<input class="easyui-textbox" id="destination" name="destination"> 
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 250px;">车牌号：</td>
+				<td style="width: 300px; height: 40px;">
+					<input class="easyui-textbox" id="licensePlate" name="licensePlate">
+				</td>
+			</tr>
+		
+		<tr>
+				<td style="width: 250px;">点选卡消费类型：</td> 
+				<td>
+				      <input type="radio" name="clickType" value="0" id="dan" checked="checked"/>单次
+				      <input type="radio" name="clickType" value="1" id="duo" />服务权益
+				</td>
+				<tr>
+				<td style="width: 300px;">是否三合一录入：</td> 
+				<td>
+				      <input type="radio" name="threeInOne" value="1" id="sanYes" />是
+				      <input type="radio" name="threeInOne" value="0" id="sanNo"  checked="checked"/>否
+				</td>
+			</tr>
+			</tr>
+		<tr>
+				<td style="width: 250px;">预约时间：</td> 
+				<td style="width: 300px; height: 40px;">
+					<input class="easyui-datetimebox" id="appointmentTime" name="appointmentTime" editable="false">
+				</td>
+			</tr>
+				      
+		</table>
+		<div style ="height: 40px;line-height: 40px;padding-right: 10px;" id="an" align="right">
+			<span id="add">
+				<button  onclick="addti()" iconCls='icon-edit' class="easyui-linkbutton">提交</button>
+				<button  onclick="add()" iconCls='icon-add' class="easyui-linkbutton">保存</button>
+			</span>
+			<button id="update" onclick="update()" iconCls='icon-edit' class="easyui-linkbutton">提交</button>
+		</div>
+	</form>
+</div>    
+	
+	<script src="../../jquery-easyui-1.5/jquery.min.js"></script>
+	<script src="../../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/moment.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.min.js"></script>
+	<script src="../../jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.mobile.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	
+	<script type="text/javascript">
+		
+    // 定义列
+   var columns = [[
+       { field: 'dgId', title: '业务编码', width: 120, align: 'center' },
+       { field: 'userName', title: '录入人', width: 100, align: 'center'},
+       { field: 'company', title: '所属公司', width: 100, align: 'center' },
+       { field: 'customerName', title: '客户姓名', width: 100, align: 'center' },
+       { field: 'telephone',title: '电话号码',width: 100,align: 'center' },
+   	{ field: 'location',title: '所在地',width: 100,align: 'center' },
+   	{ field: 'destination',title: '目的地',width: 100,align: 'center' },
+   	{ field: 'appointmentTime',title: '预约代驾时间',width: 140,align: 'center' },
+   	{ field: 'threeInOne',title: '是否是三合一录入',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '否'}  
+   			else if(value=='1'){return '是'}
+   		  }  },
+   	{ field: 'clickType',title: '点选卡消费类型',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '单次'}  
+   			else if(value=='1'){return '服务权益'}
+   		  } },
+   	{ field: 'submission',title: '是否提交',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '未提交'}  
+   			else if(value=='1'){return '已提交'}
+   		  } },	{ field: 'reject',title: '是否驳回',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '未驳回'}  
+   			else if(value=='1'){return '已驳回'}
+   		  }} ,
+		  { field: 'rejectInformation',title: '驳回意见',width: 140,align: 'center' },
+		  { field: 'approval',title: '是否审批',width: 100,align: 'center',
+		  formatter : function(value,row,index){
+		  	if(value=='0'){return '未审批'}  
+		  	else if(value=='1'){return '已审批'}
+		    } },
+   	{ field: 'handle',title: '是否处理',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '未处理'}  
+   			else if(value=='1'){return '已处理'}
+   		  } },
+   	{ field: 'state',title: '状态',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '注销'}  
+   			else if(value=='1'){return '启用'}
+			else if(value=='2'){return '完成'}
+			else if(value=='3'){return '异常'}
+   		  } } ]];
+    
+    $(function(){
+		yanzheng();
+    	// 用户管理数据表格
+		cha();
+    });
+	
+	//验证
+	function yanzheng(){
+		$.extend($.fn.validatebox.defaults.rules, {
+			csqn: {
+				validator: function (value) {
+				var now = new Date();
+				var date=moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
+				if (date <= value) {
+					return true;
+				}else{
+					return false;
+				}
+				},
+				message: '预订日期必须大于等于当前日期'
+				},
+				phoneNum: { //验证手机号   
+		
+			        validator: function(value, param){ 
+		
+			         return /^1[3-8]+\d{9}$/.test(value);
+		
+			        },    
+		
+			        message: '请输入正确的手机号码。'   
+		
+			    }
+		})
+		$('#win').panel('close');
+			var location=$("#location");
+			var yewu=$("#yewu");
+			var customerName=$("#customerName");
+			var telephone=$("#telephone");
+			var licensePlate=$("#licensePlate");
+			var destination=$("#destination");
+			var jianchezhan=$("#jianchezhan");
+			var appointmentTime=$("#appointmentTime");
+			var shifotijiao=$("#shifotijiao");
+			yewu.textbox({    
+				    required:false,
+				    missingMessage:'业务不能为空' 
+			})
+			customerName.textbox({    
+				    required:false,
+				    missingMessage:'用户不能为空' 
+			})
+			telephone.textbox({    
+				    required:false,
+				    missingMessage:'电话不能为空' 
+			})
+			licensePlate.textbox({    
+				    required:true,
+				    missingMessage:'车牌号不能为空' 
+			})
+				location.textbox({    
+				    required:true,
+				    missingMessage:'所在的地方不能为空' 
+			})
+					destination.textbox({    
+				    required:true,
+				    missingMessage:'目的地不能为空' 
+			})
+						jianchezhan.textbox({    
+				    required:false,
+				    missingMessage:'监测站不能为空' 
+			})
+			appointmentTime.textbox({  
+				    required:true,
+					validType:'csqn'
+			})
+	}
+		
+	//重置
+	function chong(){
+		$("#form").form("reset");
+	}
+	//查询
+	function cha(){
+		var data = $("#form").serialize();
+		$.post("http://127.0.0.1:8090/desig/listdesig",data).always(function(data){
+			var json=JSON.parse(data);
+			// 用户管理数据表格
+			$('#grid').datagrid({
+			    iconCls: 'icon-forward',
+			    fit: true,
+			    border: true,
+			    rownumbers: true,
+				autoRowHeight:false,
+			    striped: true,
+			    pageSize:5,
+			    pageList: [5,10,30, 50, 100],
+			    pagination: true,
+			    //toolbar: toolbar,
+			    //queryParams: {"page":page,"rows":rows},
+			    idField: 'dgId',
+			    remoteSort:false,
+			    multiSort:true,
+				loadFilter:pagerFilter,
+			    columns: columns
+			});
+			if(json.data != null){
+				$("#grid").datagrid("loadData",json.data);
+			}else{
+				$('#grid').datagrid('loadData', { total: 0, rows: [] });  
+			}
+		})
+	}
+	
+	
+	//分页拦截器函数 完整的数据进入,分页处理后,输出数据.
+		
+	function pagerFilter(data){
+	    if (typeof data.length == 'number' && typeof data.splice == 'function'){    // 判断数据是否是数组
+	        data = {
+	            total: data.length,
+	            rows: data
+	        }
+	    }
+	    var dg = $(this);
+	    var opts = dg.datagrid('options');
+	    var pager = dg.datagrid('getPager');
+	    pager.pagination({
+	        onSelectPage:function(pageNum, pageSize){
+	            opts.pageNumber = pageNum;
+	            opts.pageSize = pageSize;
+	            pager.pagination('refresh',{
+	                pageNumber:pageNum,
+	                pageSize:pageSize
+	            });
+	            dg.datagrid('loadData',data);
+	        }
+	    });
+	    if (!data.originalRows){
+	        data.originalRows = (data.rows);
+	    }
+	    var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+	    var end = start + parseInt(opts.pageSize);
+	    data.rows = (data.originalRows.slice(start, end));
+	    return data;
+	}
+	//增加
+	function xianAdd(){
+		$("#update").css({"display": "none"});
+		$("#add").show();
+		$("#win").panel({
+			iconCls:'icon-add',
+			height:500, 
+			title: '添加'
+		})
+		$("#loginFrom").form("reset");
+		$('#win').panel('open');
+		
+	}
+	//修改
+	function xianUpdate(){
+		var row = $('#grid').datagrid('getSelected');
+		if (row) {
+				$("#loginFrom").form("reset");
+				$("#add").css({"display": "none"});
+				$("#update").show();
+				$("#win").panel({
+					iconCls:'icon-edit',
+					height:500, 
+					title: '编辑'
+				})
+				$.post("http://127.0.0.1:8090/desig/GetById",{dgId:row.dgId}).always(function(data){
+					
+					var json=JSON.parse(data);
+					if(json.data.state == 0){
+						swal("操作失败！", "已注销的信息不能被编辑", "error");
+					}else if(json.data.submission == 1){
+						swal("操作失败！", "已提交的信息不能被编辑", "error");
+					}else{
+						$('#win').panel('open').panel('refresh');
+					$("#dgId").val(json.data.dgId);
+					$("#customerName").textbox('setValue',json.data.customerName);
+					$("#telephone").textbox('setValue',json.data.telephone);
+					$("#location").textbox('setValue',json.data.location);
+					$("#destination").textbox('setValue',json.data.destination);
+					$("#licensePlate").textbox('setValue',json.data.licensePlate);
+					if(json.data.clickType ==0){
+						$("#dan").attr("checked","checked");
+					}else if(json.data.clickType == 1){
+						$("#dan").removeAttr("checked","checked");
+						$("#duo").attr("checked","checked");
+					}
+					$("#appointmentTime").textbox('setValue',json.data.appointmentTime);
+					if(json.data.threeInOne == 0){
+						$("#sanNo").attr("checked","checked");
+					}else if(json.data.threeInOne == 1){
+						$("#sanNo").removeAttr("checked","checked");
+						$("#sanYes").attr("checked","checked");
+					}
+				}
+				})
+				
+		 }else{
+			swal("操作失败！", "请选择一行信息", "error");
+		 }
+	}
+		
+		//点击修改按钮
+		function update(){
+			if(!$("#loginFrom").form('enableValidation').form('validate')){
+			}else{
+				$("#submission").val("1");
+				$.post("http://127.0.0.1:8090/desig/updateBydgId",$("#loginFrom").serialize()).always(function(data){
+					if(JSON.parse(data).data==1){
+						$('#win').panel('close');
+						swal("操作成功!", "修改成功！", "success");
+						cha();
+					}else{
+						swal("操作失败!", "系统异常！", "error");
+					}
+				})
+					
+				
+			}
+		}
+		//点击添加按钮
+		function add(){
+			if(!$("#loginFrom").form('enableValidation').form('validate')){
+			}else{
+				$("#submission").val("0");
+				$("#userId").val($.cookie("uid"));
+				alert($.cookie("uid"));
+				$.post("http://127.0.0.1:8090/desig/insertOne",$("#loginFrom").serialize()).always(function(data){
+					if(JSON.parse(data).data ==1){
+						$('#win').panel('close');
+						swal("操作成功!", "添加成功！", "success");
+						cha();
+					}else{
+						swal("操作失败!", "系统异常！", "error");
+					}
+				})
+				
+			}
+		}
+		
+		//点击添加中提交按钮
+		function addti(){
+			if(!$("#loginFrom").form('enableValidation').form('validate')){
+			}else{
+				$("#submission").val("1");
+					$("#userId").val($.cookie("uid"));
+					alert($.cookie("uid"));
+				$.post("http://127.0.0.1:8090/desig/insertsubmit",$("#loginFrom").serialize()).always(function(data){
+					if(JSON.parse(data).data == 1){
+						$('#win').panel('close');
+						swal("操作成功!", "添加成功！", "success");
+						cha();
+					}else{
+						swal("操作失败!", "系统异常！", "error");
+					}
+				})
+				
+			}
+		}
+			//删除
+			function removeit(){
+				var row = $('#grid').datagrid('getSelected');
+				if (row) {
+					$.post("http://127.0.0.1:8090/desig/GetById",{dgId:row.dgId}).always(function(dataId){
+						 var json=JSON.parse(dataId);
+						if(json.data.state == 1 && json.data.submission == 0){
+							
+						
+					swal({
+						title: "您确定要删除吗？",
+						text: "您确定要删除这条数据？",
+						type: "warning",
+						showCancelButton: true,
+						closeOnConfirm: false,
+						confirmButtonText: "是的，我要删除",
+						confirmButtonColor: "#ec6c62"
+					}, function() {
+							$.post("http://127.0.0.1:8090/desig/updateBystate",{dgId:row.dgId}).always(function(data){
+								if(JSON.parse(data).data ==1){
+									swal("操作成功!", "已成功删除数据！", "success");
+									cha();
+								}else{
+									swal("操作失败！", "系统异常", "error");
+								}
+								
+							})
+						});
+						}else{
+								swal("操作失败！", "此数据已注销或已提交不能注销", "error");
+							}
+						})
+				}else{
+					swal("操作失败！", "请选择一行信息", "error");
+
+				}
+				
+			}
+			
+	</script>
+	</body>
+</html>

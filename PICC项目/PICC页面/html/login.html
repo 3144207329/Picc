@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>用户登录</title>
+	</head>
+	<link rel="stylesheet" href="../css/sweetalert.css" />
+	<link rel="stylesheet" href="../jquery-easyui-1.5/themes/default/easyui.css" />
+	<link rel="stylesheet" href="../jquery-easyui-1.5/themes/icon.css" />
+	<body>
+		<h1>欢迎使用增值服务预约操作系统 <button onclick="xian()" class="easyui-linkbutton" data-options="iconCls:'icon-search'">登陆</button></h1>
+	<div id ="win" class ="easyui-window"  data-options="iconCls:'icon-save',maximizable:true,width:400,height:250,resizable: false,footer:'#an'" title ="用户登录">
+	<form style ="padding:10px 20px 10px 40px;" id="loginFrom" action="#">  
+		<table>
+			<tr>
+				<td style="width: 300px; height: 40px;"><input class="easyui-textbox" prompt="用户账号" data-options="iconCls:'icon-search'"style="width:100%;height:34px;padding:10px" id="userName"></td>
+			</tr>
+			<tr>
+				<td style="width: 300px;  height: 70px;"" ><input class="easyui-passwordbox" prompt="用户密码" iconWidth="28" style="width:100%;height:34px;padding:10px" id="userPaw"></td>
+			</tr>
+			<tr>
+				<td><strong>记住我的编码:&nbsp;&nbsp;</strong><input style="height: 30px; width: 100px;" class="easyui-switchbutton" data-options="onText:'是',offText:'否'" id="ns"></td>
+			</tr>
+		</table>
+		<div style ="padding: 8px 0px 8px 230px;" id="an">
+			<!-- <input type="submit" class="easyui-linkbutton" icon="icon-ok" value="登录"> -->
+			<button class="easyui-linkbutton" icon="icon-ok" onclick="login()">登录</button>
+			&nbsp;&nbsp;&nbsp;
+			<a href="#" class="easyui-linkbutton" icon="icon-cancel" onclick="reset()">重置</a>
+		</div>
+	</form>
+</div>
+         
+         
+         
+    </div>
+
+	<script src="../jquery-easyui-1.5/jquery.min.js"></script>
+	<script src="../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/normal.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../jquery-easyui-1.5/jquery.easyui.min.js"></script>
+	
+	<script>
+		 $(function(){
+			 var tui = $.getHrefParam("tui");	//同过normal.js中的方法获取的id
+			 if(tui==1){
+			 	$.cookie('userName', null);
+				$.cookie('userPwd', null);
+				$.cookie('userCode', null);
+			 }
+			 
+			 
+			var userName= $("#userName");
+			var userPaw= $("#userPaw");
+			userName.textbox({    
+				    required:true,
+				    missingMessage:'用户编码不能为空'
+				    
+				})
+				
+				userPaw.textbox({      
+					    required:true,
+					    missingMessage:'密码不能为空'
+					    
+					})
+		}) 
+		
+		function xian(){
+			// 打开面板且刷新其内容。
+			$('#win').panel('open').panel('refresh');
+
+		}
+		
+			
+		function reset(){
+			$("#loginFrom").form("reset");
+		}
+		
+			
+		
+		function login(){
+			 var userName= $("#userName");
+			var userPaw= $("#userPaw");
+			if(!$("#loginFrom").form('enableValidation').form('validate')){
+				
+			}else if($("#ns").switchbutton('options').checked != true){
+				alert("请记住我的编码");
+				/* alert($("#ns").switchbutton('options').checked); */
+			}else{
+				$.post("http://127.0.0.1:8090/userLogin",{userCode:userName.val(),userPwd:userPaw.val()}).always(function(data){
+					var json=JSON.parse(data);
+					if(json.data != ""){
+						
+						$.cookie('uid', json.data.userId);
+						
+						$.cookie('rid', json.data.rid);
+						$.cookie('userName', json.data.userName);
+						$.cookie('userCode', json.data.userCode);
+						$.cookie('userPwd', json.data.userPwd);
+						location.href="index.html"; 
+					}else{
+						swal("操作失败!", "用户名或密码不正确！", "error");
+					}
+				})
+				
+				
+			} 
+		}
+	</script>
+	</body>
+</html>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.UserDao">
+
+
+ <!--   <insert id="insert" parameterType="com.bdqn.pojo.Demo" >
+        INSERT INTO  (
+
+        )
+        VALUES(
+            #{},
+            #{},
+            #{}
+        )
+    </insert>
+
+    <delete id="delete" parameterType="com.bdqn.pojo.Demo" >
+        DELETE FROM
+        WHERE
+    </delete>-->
+
+    <update id="updateUserPwd" >
+        UPDATE user
+        SET userPwd=#{userPwd}
+        WHERE userCode=#{userCode}
+    </update>
+
+<resultMap id="login" type="com.bdqn.pojo.User">
+    <result column="rid" property="rid"></result>
+</resultMap>
+    <select id="userLogin" resultMap="login">
+         SELECT u.*,ur.rid
+        FROM USER u,userrole ur
+        WHERE u.userid=ur.uid AND userCode=#{userCode} and userPwd=#{userPwd}
+    </select>
+
+<!--    <select id="loadAll" parameterType="com.bdqn.pojo.Demo" resultType="com.bdqn.pojo.Demo">
+        SELECT
+        FROM
+    </select>-->
+
+
+    <!--添加信息-->
+    <insert id="userAdd" parameterType="com.bdqn.pojo.User" >
+           INSERT INTO user (
+               userCode ,userName,userPwd,userGender,userAge,userPhone,mailbox,userCompany,state
+           )
+           VALUES(
+               #{userCode},
+               #{userName},
+               #{userPwd},
+               #{userGender},
+               #{userAge},
+               #{userPhone},
+               #{mailbox},
+               #{userCompany},
+               1
+           )
+       </insert>
+
+    <update id="userUpdate" parameterType="com.bdqn.pojo.User" >
+        UPDATE user
+        SET userName=#{userName},userGender=#{userGender},userAge=#{userAge},userPhone=#{userPhone},mailbox=#{mailbox},userCompany=#{userCompany}
+        WHERE userCode=#{userCode}
+    </update>
+
+    <update id="userDeleteState" >
+        UPDATE user
+        SET state=0
+        WHERE userCode=#{userCode}
+    </update>
+
+
+    <resultMap id="userAlldName" type="com.bdqn.pojo.User">
+        <result column="dName" property="dName"></result>
+        <result column="did" property="did"></result>
+        <result column="udid" property="udid"></result>
+    </resultMap>
+    <select id="userAll" resultMap="userAlldName">
+        SELECT u.*,d.dName,ud.udid,d.did as did
+FROM `userdeparment` ud,`user` u,`department` d
+WHERE ud.uid=u.userid AND ud.did=d.did
+<if test="userCode != null and userCode!= ''">AND userid like concat('%',#{userCode},'%')</if>
+        <if test="userName != null and userName!= ''">AND userName like concat('%',#{userName},'%')</if>
+        <if test="userGender != null and userGender!= ''">AND userGender=#{userGender}</if>
+        <if test="did != null and did!= ''">AND d.did=#{did}</if>
+        <if test="userCompany != null and userCompany!= ''">AND userCompany like concat('%',userCompany,'%')</if>
+        <if test="state != null and state!= ''">AND state=#{state}</if>
+        order by userid desc
+    </select>
+
+    <select id="userByCode" resultMap="userAlldName">
+        SELECT u.*,d.dName,ud.udid,d.did
+FROM `userdeparment` ud,`user` u,`department` d
+WHERE ud.uid=u.userid AND ud.did=d.did and userCode = #{userCode}
+    </select>
+
+    <select id="userById" resultMap="userAlldName">
+        SELECT *
+        FROM user
+        WHERE  userCode = #{userCode}
+    </select>
+
+</mapper>

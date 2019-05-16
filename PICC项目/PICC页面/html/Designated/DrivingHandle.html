@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>酒后代驾业务管理</title>
+	</head>
+	<style>
+		td{
+			font-size: 14px;
+		}
+		body{
+			margin: 0px;
+			padding: 0px;
+		}
+
+	</style>
+	<link rel="stylesheet" href="../../css/sweetalert.css" />
+	<link rel="stylesheet" href="../../jquery-easyui-1.5/themes/default/easyui.css">
+	<link rel="stylesheet"  href="../../jquery-easyui-1.5/themes/icon.css">
+	<body class="easyui-layout">
+		<div region="north">
+		<form id="form">
+					<input type="hidden" name="page" id="page" value="">
+					<input type="hidden" name="rows" id="rows" value="">
+			<table>
+				<tr id="c">
+					<td>客户姓名:</td><td><input class="easyui-textbox"  style="width:165px" name="customerName"></td>
+					<td>业务编码:</td><td><input class="easyui-textbox"  style="width:165px" name="dgId"></td>
+					<td>车牌号:</td><td><input class="easyui-textbox"  style="width:165px" name="licensePlate"></td>
+					<td>是否处理:</td>
+						<td><select editable="false" name="handle"
+						 class="easyui-combobox"  style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="1">是</option>   
+					    <option value="0">否</option>   
+					</select></td>
+				</tr>
+				
+				<tr>
+					<td>是否三合一录入:</td>
+					<td><select editable="false" name="threeInOne"
+					 class="easyui-combobox" style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="1">是</option>   
+					    <option value="0">否</option>   
+					</select></td>
+					<td>点卡消费类型:</td>
+					<td><select editable="false" name="clickType"
+					 class="easyui-combobox"  style="width:165px;">   
+					    <option value="">-请选择-</option>   
+					    <option value="1">是</option>   
+					    <option value="0">否</option>   
+					</select></td>
+						<td>是否领取:</td>
+							<td><select editable="false" name="lingqu"
+							 class="easyui-combobox"  style="width:165px;">   
+						    <option value="">-请选择-</option>   
+						    <option value="1">是</option>   
+						    <option value="0">否</option>   
+						</select></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-search',plain:true" onclick="cha()">查询</a></td>
+					<td><a href="javascript:void(0)" class="easyui-linkbutton" 
+					data-options="iconCls:'icon-reload',plain:true" onclick="chong()">重置</a></td>
+				</tr>
+			</table>
+		</form>
+		
+</div>
+	
+
+		<div region="center" border="false">
+		<div id="tb" style="height:auto">
+		<a href="javascript:void(0)" class="easyui-linkbutton" 
+		data-options="iconCls:'icon-add',plain:true" onclick="lingqu()">领取</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" 
+		data-options="iconCls:'icon-edit',plain:true" onclick="chuli()">处理</a>
+		</div>
+		<table id="grid" data-options="toolbar: '#tb',singleSelect: true" class="easyui-datagrid">
+		</table>        
+		
+	
+	
+</div>
+
+<div id ="win" class ="easyui-window" 
+ data-options="resizable: false,collapsible:false,maximizable:false,modal:true,minimizable:false,footer:'#an'" title ="修改" style ="width:400px; height:450px;">	
+ <form style ="padding:10px 20px 10px 40px;" id="loginFrom" action="#">  
+		<table  style="padding-top: 5px;">
+			<input type="hidden" id="dgId" name="dgId">
+		</table>
+	</form>
+</div>    
+	
+	<script src="../../jquery-easyui-1.5/jquery.min.js"></script>
+	<script src="../../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/moment.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../js/jquery.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.min.js"></script>
+	<script src="../../jquery-easyui-1.5/locale/easyui-lang-zh_CN.js"></script>
+	<script src="../../jquery-easyui-1.5/jquery.easyui.mobile.js" type="text/javascript" charset="utf-8"></script>
+	
+	
+	
+	<script type="text/javascript">
+		
+    // 定义列
+   var columns = [[
+       { field: 'dgId', title: '业务编码', width: 120, align: 'center' },
+       { field: 'userName', title: '录入人', width: 100, align: 'center'},
+       { field: 'company', title: '所属公司', width: 100, align: 'center' },
+       { field: 'customerName', title: '客户姓名', width: 100, align: 'center' },
+       { field: 'telephone',title: '电话号码',width: 100,align: 'center' },
+   	{ field: 'location',title: '所在地',width: 100,align: 'center' },
+   	{ field: 'destination',title: '目的地',width: 100,align: 'center' },
+   	{ field: 'appointmentTime',title: '预约代驾时间',width: 140,align: 'center' },
+	 { field: 'licensePlate',title: '车牌号',width: 140,align: 'center' },
+   	{ field: 'threeInOne',title: '是否是三合一录入',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '否'}  
+   			else if(value=='1'){return '是'}
+   		  }  },
+   	{ field: 'clickType',title: '点选卡消费类型',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '单次'}  
+   			else if(value=='1'){return '服务权益'}
+   		  } },
+   	{ field: 'submission',title: '是否提交',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '未提交'}  
+   			else if(value=='1'){return '已提交'}
+   		  } },
+   	{ field: 'handle',title: '是否处理',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '未处理'}  
+   			else if(value=='1'){return '已处理'}
+   		  } },
+		    { field: 'approval',title: '是否审批',width: 100,align: 'center',
+		  formatter : function(value,row,index){
+		  	if(value=='0'){return '未审批'}  
+		  	else if(value=='1'){return '已审批'}
+		    } },
+			 { field: 'lingqu',title: '是否领取',width: 100,align: 'center',
+			formatter : function(value,row,index){
+				if(value=='0'){return '未领取'}  
+				else if(value=='1'){return '已领取'}
+			  } },
+   	{ field: 'state',title: '状态',width: 100,align: 'center',
+   		formatter : function(value,row,index){
+   			if(value=='0'){return '注销'}  
+   			else if(value=='1'){return '启用'}
+			else if(value=='2'){return '完成'}
+			else if(value=='3'){return '异常'}
+   		  } },
+		  
+		
+		   
+		  ]];
+    
+    $(function(){
+    	// 用户管理数据表格
+		cha();
+				$('#win').panel('close');
+    });
+		
+	//重置
+	function chong(){
+		$("#form").form("reset");
+	}
+	//查询
+	function cha(){
+		var data = $("#form").serialize();
+		$.post("http://127.0.0.1:8090/desig/designatedReceiveAll",data).always(function(data){
+			var json=JSON.parse(data);
+			// 用户管理数据表格
+			$('#grid').datagrid({
+			    iconCls: 'icon-forward',
+			    fit: true,
+			    border: true,
+			    rownumbers: true,
+				autoRowHeight:false,
+			    striped: true,
+			    pageSize:5,
+			    pageList: [5,10,30, 50, 100],
+			    pagination: true,
+			    //toolbar: toolbar,
+			    //queryParams: {"page":page,"rows":rows},
+			    idField: 'dgId',
+			    remoteSort:false,
+			    multiSort:true,
+				loadFilter:pagerFilter,
+			    columns: columns
+			});
+			if(json.data != null){
+				$("#grid").datagrid("loadData",json.data);
+			}else{
+				$('#grid').datagrid('loadData', { total: 0, rows: [] });  
+			}
+		})
+	}
+	
+	
+	//分页拦截器函数 完整的数据进入,分页处理后,输出数据.
+		
+	function pagerFilter(data){
+	    if (typeof data.length == 'number' && typeof data.splice == 'function'){    // 判断数据是否是数组
+	        data = {
+	            total: data.length,
+	            rows: data
+	        }
+	    }
+	    var dg = $(this);
+	    var opts = dg.datagrid('options');
+	    var pager = dg.datagrid('getPager');
+	    pager.pagination({
+	        onSelectPage:function(pageNum, pageSize){
+	            opts.pageNumber = pageNum;
+	            opts.pageSize = pageSize;
+	            pager.pagination('refresh',{
+	                pageNumber:pageNum,
+	                pageSize:pageSize
+	            });
+	            dg.datagrid('loadData',data);
+	        }
+	    });
+	    if (!data.originalRows){
+	        data.originalRows = (data.rows);
+	    }
+	    var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+	    var end = start + parseInt(opts.pageSize);
+	    data.rows = (data.originalRows.slice(start, end));
+	    return data;
+	}
+	//审核
+	function lingqu(){
+		var row = $('#grid').datagrid('getSelected');
+				if (row) {
+					
+						
+						
+					swal({
+						title: "您确定要领取吗？",
+						text: "您确定要领取这条数据？",
+						type: "warning",
+						showCancelButton: true,
+						closeOnConfirm: false,
+						confirmButtonText: "是的，我要删除",
+						confirmButtonColor: "#ec6c62"
+					}, function() {
+							$.post("http://127.0.0.1:8090/desig/updateByslingqu",{dgId:row.dgId}).always(function(data){
+								if(JSON.parse(data).data ==1){
+										var rowIndex = $('#grid').datagrid('getRowIndex', row);
+										$('#grid').datagrid('deleteRow', rowIndex);  
+									swal("操作成功!", "已成功审核数据！", "success");
+									cha();
+								}else{
+									swal("操作失败！", "系统异常", "error");
+								}
+								
+							})
+						});
+						
+						
+				}else{
+					swal("操作失败！", "请选择一行信息", "error");
+	
+				}
+		
+		
+		
+	}
+	
+		
+	//驳回
+	function chuli(){
+	var row = $('#grid').datagrid('getSelected');
+				if (row) {
+					$.post("http://127.0.0.1:8090/desig/GetById",{dgId:row.dgId}).always(function(data){
+						var json=JSON.parse(data);
+						if(json.data.lingqu == 0){
+								swal("操作失败！", "未领取的订单不能处理！", "error");
+							}else{
+					swal({
+						title: "您确定要通过吗？",
+						text: "您确定要完成这条数据？",
+						type: "warning",
+						showCancelButton: true,
+						closeOnConfirm: false,
+						confirmButtonText: "是的，我要删除",
+						confirmButtonColor: "#ec6c62"
+					}, function() {
+							$.post("http://127.0.0.1:8090/desig/updateBychuli",{dgId:row.dgId}).always(function(data){
+								alert(data);
+								if(JSON.parse(data).data ==1){
+										var rowIndex = $('#grid').datagrid('getRowIndex', row);
+										$('#grid').datagrid('deleteRow', rowIndex);  
+									swal("操作成功!", "已成功审核数据！", "success");
+									cha();
+								}else{
+									swal("操作失败！", "系统异常", "error");
+								}
+								
+							})
+						});
+						}
+						})
+				}else{
+					swal("操作失败！", "请选择一行信息", "error");
+	
+				}
+	}
+		
+		
+			
+	</script>
+	</body>
+</html>

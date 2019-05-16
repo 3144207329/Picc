@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.SubstitutevehicleDao">
+    <!--查询车主秘书所有数据-->
+    <resultMap id="jianche" type="com.bdqn.pojo.Substitutevehicle">
+        <result property="msId" column="msId"></result>
+        <result property="userName" column="userName"></result>
+        <result property="company" column="company"></result>
+        <result property="customerName" column="customerName"></result>
+        <result property="telephone" column="telephone"></result>
+        <result property="vehicleType" column="vehicleType"></result>
+        <result property="licensePlate" column="licensePlate"></result>
+        <result property="strengthPolicy" column="strengthPolicy"></result>
+        <result property="testingName" column="testingName"></result>
+        <result property="scheduledTime" column="scheduledTime"></result>
+        <result property="submission" column="submission"></result>
+        <result property="reject" column="reject"></result>
+        <result property="rejectInformation" column="rejectInformation"></result>
+        <result property="approval" column="approval"></result>
+        <result property="handle" column="handle"></result>
+        <result property="state" column="state"></result>
+    </resultMap>
+    <select id="SubstitutevehicleAll" resultMap="jianche" parameterType="com.bdqn.pojo.Substitutevehicle">
+        SELECT m.*,u.userName
+        FROM substitutevehicle AS m,USER AS u
+        WHERE m.`userId`=u.`userid`
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="msId != null and msId != ''">AND msId LIKE CONCAT('%',#{msId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="state == 1 or state == 0 or state == 2 or state == 3">AND m.state=#{state}</if>
+        <!--<if test="approval == 1 or approval == 0">AND approval=#{approval}</if>-->
+        <!--<if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>-->
+        ORDER BY msId DESC
+    </select>
+
+    <!--根据id查询数据-->
+    <select id="jiancheById" resultType="com.bdqn.pojo.Substitutevehicle">
+        select * from substitutevehicle where msId=#{msId}
+    </select>
+
+    <!--审批按钮修改-->
+    <update id="approval" >
+          UPDATE `substitutevehicle`
+          SET `approval` = 1
+          WHERE `msId` = #{msId}
+    </update>
+
+    <!--驳回-->
+    <update id="jianchereject" >
+          UPDATE `substitutevehicle`
+          SET `reject` = 1,
+          submission = 0,
+          `rejectInformation` = #{rejectInformation}
+          WHERE `msId` = #{msId}
+    </update>
+
+    <!--组长审批时查询已提交或已驳回的所有数据-->
+    <select id="jianapprovalAll" resultMap="jianche" parameterType="com.bdqn.pojo.Substitutevehicle">
+        SELECT m.*,u.userName
+        FROM `substitutevehicle` AS m,USER AS u
+        WHERE m.`userId`=u.`userid` AND reject = 0 AND submission = 1 AND m.state IN (1,2)
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="msId != null and msId != ''">AND msId LIKE CONCAT('%',#{msId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="approval == 1 or approval == 0">AND approval=#{approval}</if>
+        <if test="state == 1 or state == 0 or state == 2 or state == 3">AND m.state=#{state}</if>
+        ORDER BY msId DESC
+    </select>
+
+    <!--修改信息-->
+    <update id="jiancheUpdate" parameterType="com.bdqn.pojo.Substitutevehicle" >
+          UPDATE `substitutevehicle`
+SET
+  customerName=#{customerName},
+  `telephone` = #{telephone},
+  `vehicleType`= #{vehicleType},
+  `licensePlate` = #{licensePlate},
+  `strengthPolicy` = #{strengthPolicy},
+  `testingName` = #{testingName},
+  `scheduledTime` = #{scheduledTime},
+  `submission` = #{submission},
+  reject=0
+  WHERE `msId` = #{msId}
+    </update>
+
+    <!--添加信息-->
+    <insert id="jiancheAdd" parameterType="com.bdqn.pojo.Substitutevehicle" >
+           INSERT INTO substitutevehicle (
+                userId,company,customerName,telephone,licensePlate,vehicleType,strengthPolicy,testingName,state,submission,scheduledTime
+           )
+           VALUES(
+               #{userId},
+               '石家庄',
+               #{customerName},
+               #{telephone},
+               #{licensePlate},
+              #{vehicleType},
+               #{strengthPolicy},
+               #{testingName},
+               1,
+               #{submission},
+               #{scheduledTime}
+           )
+       </insert>
+
+    <!--将状态改为注销-->
+    <update id="jiancheDelete" >
+          UPDATE `substitutevehicle`
+    SET
+    `state` = 0
+  WHERE `msId` = #{msId}
+    </update>
+    <!--调度员领取时查询已提交和已审批的所有数据-->
+    <select id="jiancheCarReceive" resultMap="jianche" parameterType="com.bdqn.pojo.Substitutevehicle">
+        SELECT nw.*,u.userName
+        FROM `substitutevehicle` AS nw,USER AS u
+        WHERE nw.`userId`=u.`userid` AND approval=1 AND submission = 1   AND nw.state IN (1,2)
+       <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+            <if test="msId != null and msId != ''">AND msId LIKE CONCAT('%',#{msId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="state == 1 or state == 0 or state == 2 or state == 3">AND m.state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="handle == 1 or handle == 0">AND handle=#{handle}</if>
+        ORDER BY msId DESC
+    </select>
+
+    <!--调度员处理信息-->
+    <update id="jiancheCarUpdate" >
+          UPDATE `substitutevehicle`
+          SET `handle` = 1,state=2
+          WHERE `msId` = #{msId}
+    </update>
+
+    <!--调度员异常数据-->
+    <update id="jiancheCarAbnormalUpdate" >
+          UPDATE `substitutevehicle`
+          SET  state= 3,`handle` = 1
+          WHERE `msId` = #{msId}
+    </update>
+
+    <!--查询异常箱的总行数-->
+    <select id="jiancheCarAbnormalCount" resultType="int" parameterType="com.bdqn.pojo.Substitutevehicle">
+        SELECT count(*)
+        FROM substitutevehicle
+        WHERE state= 3
+    </select>
+
+    <!--调度员查询异常箱-->
+    <select id="jiancheCarAbnormal" resultMap="jianche" parameterType="com.bdqn.pojo.Substitutevehicle">
+        SELECT nw.*,u.userName
+        FROM `substitutevehicle` AS nw,USER AS u
+        WHERE nw.`userId`=u.`userid` AND approval=1  AND nw.state =3
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+    </select>
+
+    <!--驳回箱查询-->
+    <select id="jianchebhAll" resultMap="jianche" parameterType="com.bdqn.pojo.Substitutevehicle">
+        SELECT m.*,u.userName
+        FROM substitutevehicle AS m,USER AS u
+        WHERE m.`userId`=u.`userid` and submission = 0 and reject = 1 and m.state in (1,2)
+        ORDER BY msId DESC
+    </select>
+
+    <!--草稿箱查询-->
+    <select id="jianchecaogaoAll" resultMap="jianche" parameterType="com.bdqn.pojo.Substitutevehicle">
+        SELECT m.*,u.userName
+        FROM substitutevehicle AS m,USER AS u
+        WHERE m.`userId`=u.`userid` and submission = 0 and reject = 0 and m.state in (1,2)
+        ORDER BY msId DESC
+    </select>
+
+    <!--草稿行数-->
+    <select id="jianchecaoGaoCount" resultType="int" parameterType="com.bdqn.pojo.Substitutevehicle">
+        SELECT count(*)
+        FROM substitutevehicle
+        WHERE submission = 0 and reject = 0 and state in (1,2)
+    </select>
+    <!--驳回行数-->
+    <select id="jianchebhCount" resultType="int" parameterType="com.bdqn.pojo.Substitutevehicle">
+        SELECT count(*)
+        FROM substitutevehicle
+        WHERE submission = 0 and reject = 1 and state in (1,2)
+    </select>
+</mapper>

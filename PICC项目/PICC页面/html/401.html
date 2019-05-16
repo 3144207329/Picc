@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="../css/sweetalert.css" />
+	</head>
+	
+	<body style="">
+	
+	<script src="../jquery-easyui-1.5/jquery.min.js"></script>
+	<script src="../js/sweetalert.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			  swal({
+                        title: "404",
+                        text: "页面将在<strong id='time'>5</strong>秒后自动跳转登陆页面",
+                        imageUrl: "../img/jg.png",
+                        html: true,
+                        timer: 5000,
+                        showConfirmButton: false
+                    });
+					$("#time").css({"font-size":"20px"});
+		})
+		
+		function countDown(){
+				//获取初始时间
+				var time = $("#time");
+				//获取到id为time标签中的数字时间
+				if(time.text() == 1){
+					//等于0时清除计时，并跳转该指定页面
+					window.location.href="login.html";
+				}else{
+					time.text(parseInt(parseInt(time.text())-1));
+				}
+			}
+			//1000毫秒调用一次
+			window.setInterval("countDown()",1000);
+    
+	</script>
+	</body>
+</html>

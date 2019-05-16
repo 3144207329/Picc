@@ -1,0 +1,1284 @@
+2019-04-01 18:03:39,762 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 16632 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:03:39,762 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:03:39,762 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:03:42,325 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 3.391 seconds (JVM running for 5.182)
+2019-04-01 18:03:59,164 ERROR (BaseController.java:284)- 系统异常:Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:305)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:378)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:474)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:289)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.bdqn.service.impl.MenuServiceImpl$$EnhancerBySpringCGLIB$$4010caab.shu(<generated>)
+	at com.bdqn.controller.MenuController.shu(MenuController.java:62)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:835)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:262)
+	... 62 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:152)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:955)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
+	... 73 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:155)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65)
+	... 76 common frames omitted
+2019-04-01 18:04:37,588 ERROR (BaseController.java:284)- 系统异常:Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:305)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:378)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:474)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:289)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.bdqn.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$b828c167.userLogin(<generated>)
+	at com.bdqn.controller.UserController.userLogin(UserController.java:20)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:835)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:262)
+	... 62 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:152)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:955)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
+	... 73 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:155)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65)
+	... 76 common frames omitted
+2019-04-01 18:04:40,660 ERROR (BaseController.java:284)- 系统异常:Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:305)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:378)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:474)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:289)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.bdqn.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$b828c167.userLogin(<generated>)
+	at com.bdqn.controller.UserController.userLogin(UserController.java:20)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:835)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:262)
+	... 62 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:152)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:955)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
+	... 73 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:155)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65)
+	... 76 common frames omitted
+2019-04-01 18:04:43,705 ERROR (BaseController.java:284)- 系统异常:Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:305)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:378)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:474)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:289)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.bdqn.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$b828c167.userLogin(<generated>)
+	at com.bdqn.controller.UserController.userLogin(UserController.java:20)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:835)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:262)
+	... 62 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:152)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:955)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
+	... 73 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:155)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65)
+	... 76 common frames omitted
+2019-04-01 18:04:46,769 ERROR (BaseController.java:284)- 系统异常:Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:305)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:378)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:474)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:289)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.bdqn.service.impl.UserServiceImpl$$EnhancerBySpringCGLIB$$b828c167.userLogin(<generated>)
+	at com.bdqn.controller.UserController.userLogin(UserController.java:20)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:835)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:262)
+	... 62 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:152)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:955)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
+	... 73 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:155)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65)
+	... 76 common frames omitted
+2019-04-01 18:04:49,879 ERROR (BaseController.java:284)- 系统异常:Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:305)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:378)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:474)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:289)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.bdqn.service.impl.MenuServiceImpl$$EnhancerBySpringCGLIB$$4010caab.shu(<generated>)
+	at com.bdqn.controller.MenuController.shu(MenuController.java:62)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:835)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:262)
+	... 62 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:152)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:955)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
+	... 73 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:155)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65)
+	... 76 common frames omitted
+2019-04-01 18:05:32,675 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 14200 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:05:32,675 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:05:32,675 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:05:34,846 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.687 seconds (JVM running for 3.578)
+2019-04-01 18:05:49,499 ERROR (BaseController.java:284)- 系统异常:Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+org.springframework.transaction.CannotCreateTransactionException: Could not open JDBC Connection for transaction; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:305)
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.getTransaction(AbstractPlatformTransactionManager.java:378)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.createTransactionIfNecessary(TransactionAspectSupport.java:474)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:289)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:98)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:688)
+	at com.bdqn.service.impl.MenuServiceImpl$$EnhancerBySpringCGLIB$$32e69949.shu(<generated>)
+	at com.bdqn.controller.MenuController.shu(MenuController.java:62)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:189)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:138)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:102)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:800)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1038)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:908)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:660)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:200)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:834)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1415)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createCommunicationsException(SQLError.java:174)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:64)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:835)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:199)
+	at com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:136)
+	at com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:369)
+	at com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:198)
+	at com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:467)
+	at com.zaxxer.hikari.pool.HikariPool.checkFailFast(HikariPool.java:541)
+	at com.zaxxer.hikari.pool.HikariPool.<init>(HikariPool.java:115)
+	at com.zaxxer.hikari.HikariDataSource.getConnection(HikariDataSource.java:112)
+	at org.springframework.jdbc.datasource.DataSourceTransactionManager.doBegin(DataSourceTransactionManager.java:262)
+	... 62 common frames omitted
+Caused by: com.mysql.cj.exceptions.CJCommunicationsException: Communications link failure
+
+The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:61)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:105)
+	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
+	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:91)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:152)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:955)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
+	... 73 common frames omitted
+Caused by: java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.waitForConnect(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(DualStackPlainSocketImpl.java:85)
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:589)
+	at com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:155)
+	at com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:65)
+	... 76 common frames omitted
+2019-04-01 18:07:52,373 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 8492 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:07:52,374 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:07:52,375 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:07:54,389 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.482 seconds (JVM running for 3.255)
+2019-04-01 18:07:57,920 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:07:57,940 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 2(Integer)
+2019-04-01 18:07:57,962 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 18:07:57,968 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:07:57,968 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 7(Integer)
+2019-04-01 18:07:57,969 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 18:09:24,146 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:09:24,146 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 2(Integer)
+2019-04-01 18:09:24,148 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 18:09:24,150 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:09:24,151 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 7(Integer)
+2019-04-01 18:09:24,152 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 18:10:21,995 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT u.*,ur.rid FROM USER u,userrole ur WHERE u.userid=ur.uid AND userCode=? and userPwd=? 
+2019-04-01 18:10:21,996 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 001(String), 123(String)
+2019-04-01 18:10:22,000 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:10:27,364 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT u.*,ur.rid FROM USER u,userrole ur WHERE u.userid=ur.uid AND userCode=? and userPwd=? 
+2019-04-01 18:10:27,365 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 001(String), 321(String)
+2019-04-01 18:10:27,366 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 18:10:27,620 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:10:27,621 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 2(Integer)
+2019-04-01 18:10:27,623 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 18:10:27,627 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:10:27,629 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 7(Integer)
+2019-04-01 18:10:27,632 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 18:16:36,552 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:16:36,554 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:16:36,556 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 4
+2019-04-01 18:16:36,560 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:16:36,560 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:16:36,562 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:16:36,568 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:16:36,569 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:16:36,570 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:16:36,572 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:16:36,572 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:16:36,573 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:16:36,576 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:16:36,576 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:16:36,577 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:24:02,580 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:24:02,580 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:24:02,584 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 4
+2019-04-01 18:24:02,589 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:24:02,590 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:24:02,591 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:24:02,594 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:24:02,594 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:24:02,595 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:24:02,598 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:24:02,598 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:24:02,599 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:24:02,607 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:24:02,607 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:24:02,608 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:24:29,478 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:24:29,479 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:24:29,481 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 4
+2019-04-01 18:24:29,484 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:24:29,484 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:24:29,485 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:24:29,488 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:24:29,489 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:24:29,491 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:24:29,495 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:24:29,495 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:24:29,496 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:24:29,498 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:24:29,498 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:24:29,499 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:25:23,798 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:25:23,799 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:25:23,802 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:25:23,805 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:23,805 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:25:23,806 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:25:23,808 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:23,809 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:25:23,809 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:25:23,812 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:23,812 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:25:23,813 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:25:23,818 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:23,818 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:25:23,818 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:25:23,821 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:23,821 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:25:23,822 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:25:28,166 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:25:28,167 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:25:28,169 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:25:28,173 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:28,173 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:25:28,174 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:25:28,177 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:28,177 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:25:28,178 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:25:28,184 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:28,184 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:25:28,185 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:25:28,187 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:28,187 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:25:28,188 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:25:28,191 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:25:28,191 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:25:28,192 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:26:07,352 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:26:07,352 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:26:07,355 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:26:07,360 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:26:07,361 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:26:07,363 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:26:07,368 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:26:07,368 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:26:07,369 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:26:07,371 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:26:07,371 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:26:07,372 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:26:07,374 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:26:07,374 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:26:07,375 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:26:07,377 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:26:07,377 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:26:07,380 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:36:33,658 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 9608 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:36:33,658 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:36:33,659 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:36:35,433 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.158 seconds (JVM running for 2.99)
+2019-04-01 18:36:43,581 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:36:43,598 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:36:43,619 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:36:43,625 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:43,625 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:36:43,627 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:36:43,633 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:43,634 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:36:43,635 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:36:43,637 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:43,638 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:36:43,638 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:36:43,642 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:43,642 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:36:43,643 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:36:43,646 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:43,646 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:36:43,649 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:36:53,640 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:36:53,642 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:36:53,646 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:36:53,649 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:53,649 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:36:53,651 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:36:53,653 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:53,654 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:36:53,655 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:36:53,657 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:53,658 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:36:53,660 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:36:53,664 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:53,665 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:36:53,665 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:36:53,667 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:36:53,668 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:36:53,669 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:39:49,885 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 15524 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:39:49,886 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:39:49,886 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:39:51,880 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.391 seconds (JVM running for 3.232)
+2019-04-01 18:39:54,118 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:39:54,138 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:39:54,160 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:39:54,172 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:39:54,172 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:39:54,174 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:39:54,176 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:39:54,177 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:39:54,178 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:39:54,183 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:39:54,183 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:39:54,185 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:39:54,188 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:39:54,189 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:39:54,190 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:39:54,196 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:39:54,198 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:39:54,200 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:40:18,408 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 4820 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:40:18,409 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:40:18,410 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:40:20,204 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.182 seconds (JVM running for 2.987)
+2019-04-01 18:40:23,793 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:40:23,812 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:40:23,838 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:40:23,844 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:40:23,845 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:40:23,846 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:40:23,852 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:40:23,853 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:40:23,854 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:40:23,856 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:40:23,857 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:40:23,857 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:40:23,864 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:40:23,864 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:40:23,866 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:40:23,875 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:40:23,875 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:40:23,877 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:42:27,437 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 17128 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:42:27,437 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:42:27,438 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:42:29,382 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.402 seconds (JVM running for 3.298)
+2019-04-01 18:42:29,667 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:42:29,685 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:42:29,714 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:42:29,720 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:42:29,721 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:42:29,724 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:42:29,729 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:42:29,730 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:42:29,731 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:42:29,734 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:42:29,734 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:42:29,735 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:42:29,739 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:42:29,739 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:42:29,740 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:42:29,745 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:42:29,746 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:42:29,748 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:44:28,609 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 15196 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:44:28,610 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:44:28,612 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:44:30,524 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.51 seconds (JVM running for 3.219)
+2019-04-01 18:44:32,149 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:44:32,165 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:44:32,181 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:44:32,186 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:44:32,187 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:44:32,189 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:44:32,192 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:44:32,192 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:44:32,193 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:44:32,196 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:44:32,197 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:44:32,197 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:44:32,200 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:44:32,200 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:44:32,201 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:44:32,203 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:44:32,204 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:44:32,205 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:45:24,534 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 7836 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:45:24,535 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:45:24,537 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:45:26,439 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.314 seconds (JVM running for 3.06)
+2019-04-01 18:45:32,599 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:45:32,617 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:45:32,634 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:45:32,641 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:45:32,642 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:45:32,644 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:45:32,650 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:45:32,650 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:45:32,651 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:45:32,653 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:45:32,654 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:45:32,655 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:45:32,659 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:45:32,660 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:45:32,660 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:45:32,665 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:45:32,665 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:45:32,667 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:46:45,684 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 1740 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:46:45,685 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:46:45,686 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:46:47,741 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.497 seconds (JVM running for 3.258)
+2019-04-01 18:46:48,410 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:46:48,430 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:46:48,450 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:46:48,455 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:48,455 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:46:48,457 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:46:48,461 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:48,461 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:46:48,463 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:46:48,466 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:48,466 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:46:48,467 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:46:48,471 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:48,471 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:46:48,472 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:46:48,474 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:48,474 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:46:48,475 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:46:53,604 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:46:53,605 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:46:53,610 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:46:53,614 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:53,614 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:46:53,616 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:46:53,619 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:53,620 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:46:53,620 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:46:53,623 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:53,623 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:46:53,624 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:46:53,629 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:53,629 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:46:53,630 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:46:53,633 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:46:53,633 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:46:53,634 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:48:44,613 INFO (StartupInfoLogger.java:50)- Starting PiccApplication on 紫迎 with PID 12044 (C:\Users\Dell\Desktop\Picc\target\classes started by Dell in C:\Users\Dell\Desktop\Picc)
+2019-04-01 18:48:44,613 DEBUG (StartupInfoLogger.java:53)- Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-04-01 18:48:44,614 INFO (SpringApplication.java:675)- No active profile set, falling back to default profiles: default
+2019-04-01 18:48:46,364 INFO (StartupInfoLogger.java:59)- Started PiccApplication in 2.129 seconds (JVM running for 2.806)
+2019-04-01 18:48:51,891 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:48:51,908 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:48:51,924 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:48:51,930 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:48:51,930 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:48:51,931 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:48:51,934 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:48:51,934 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:48:51,935 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:48:51,938 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:48:51,938 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:48:51,939 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:48:51,943 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:48:51,944 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:48:51,945 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:48:51,947 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:48:51,948 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:48:51,948 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:57:39,756 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:57:39,759 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:57:39,763 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:57:39,767 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:57:39,767 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:57:39,769 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:57:39,772 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:57:39,772 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:57:39,773 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 18:57:39,777 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:57:39,778 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:57:39,779 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:57:39,782 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:57:39,782 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:57:39,783 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:57:39,786 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:57:39,787 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:57:39,788 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:58:17,162 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 18:58:17,163 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:58:17,165 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 18:58:17,168 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:58:17,168 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 18:58:17,169 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:58:17,172 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:58:17,172 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 18:58:17,176 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 18:58:17,180 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:58:17,181 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 18:58:17,182 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:58:17,185 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:58:17,185 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 18:58:17,186 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 18:58:17,189 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 18:58:17,189 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 18:58:17,192 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:54:33,207 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 19:54:33,209 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 19:54:33,212 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 6
+2019-04-01 19:54:33,214 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:54:33,215 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 19:54:33,216 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:54:33,219 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:54:33,219 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 19:54:33,220 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 19:54:33,224 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:54:33,225 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 19:54:33,226 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:54:33,228 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:54:33,228 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 19:54:33,229 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:54:33,231 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:54:33,231 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 19:54:33,232 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:54:33,235 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:54:33,235 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 19:54:33,236 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:58:13,982 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 19:58:13,983 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 19:58:13,984 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 19:58:13,987 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:13,987 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 1(Integer)
+2019-04-01 19:58:13,988 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:58:13,993 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:13,993 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 19:58:13,995 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 19:58:13,999 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:13,999 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 19:58:14,000 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:58:14,002 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:14,002 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 19:58:14,003 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:58:14,007 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:14,007 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 19:58:14,010 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:58:22,581 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 19:58:22,581 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 2(Integer)
+2019-04-01 19:58:22,583 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 5
+2019-04-01 19:58:22,586 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:22,586 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 19:58:22,588 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 19:58:22,591 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:22,592 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 19:58:22,593 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:58:22,598 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:22,598 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 19:58:22,599 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:58:22,602 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:22,602 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 7(Integer)
+2019-04-01 19:58:22,602 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 0
+2019-04-01 19:58:22,605 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:58:22,605 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 19:58:22,606 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:59:17,601 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 19:59:17,602 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 2(Integer)
+2019-04-01 19:59:17,603 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 4
+2019-04-01 19:59:17,606 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:17,606 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 4(Integer)
+2019-04-01 19:59:17,607 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 1
+2019-04-01 19:59:17,609 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:17,609 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 19:59:17,610 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:59:17,615 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:17,615 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 19:59:17,616 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:59:17,618 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:17,619 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 19:59:17,620 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:59:33,777 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 19:59:33,778 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 19:59:33,778 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 3
+2019-04-01 19:59:33,781 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:33,781 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 19:59:33,781 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:59:33,784 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:33,784 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 19:59:33,784 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:59:33,787 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:33,787 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 19:59:33,788 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:59:44,255 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m.* FROM menu AS m,rolemenu AS rm WHERE m.mid=rm.mid AND rm.roleid=? 
+2019-04-01 19:59:44,256 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 19:59:44,259 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 3
+2019-04-01 19:59:44,262 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:44,262 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 5(Integer)
+2019-04-01 19:59:44,263 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:59:44,265 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:44,265 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 6(Integer)
+2019-04-01 19:59:44,268 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2
+2019-04-01 19:59:44,274 DEBUG (BaseJdbcLogger.java:159)- ==>  Preparing: SELECT m2.* FROM menu m1,menu m2 WHERE m1.mid=m2.pid AND m2.pid=? 
+2019-04-01 19:59:44,274 DEBUG (BaseJdbcLogger.java:159)- ==> Parameters: 9(Integer)
+2019-04-01 19:59:44,275 DEBUG (BaseJdbcLogger.java:159)- <==      Total: 2

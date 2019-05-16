@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bdqn.dao.NewCarDao">
+
+    <!--添加信息-->
+      <insert id="newCarAdd" parameterType="com.bdqn.pojo.NewCar" >
+           INSERT INTO newcar (
+                userId,company,customerName,telephone,licensePlate,crossStrength,business,insuredType,submission,state
+           )
+           VALUES(
+               #{userId},
+               '石家庄',
+               #{customerName},
+               #{telephone},
+               #{licensePlate},
+               #{crossStrength},
+               #{business},
+               #{insuredType},
+               #{submission},
+               1
+           )
+       </insert>
+    <!--修改信息-->
+    <update id="newCarUpdate" parameterType="com.bdqn.pojo.NewCar" >
+          UPDATE `newcar`
+SET
+  customerName=#{customerName},
+  `telephone` = #{telephone},
+  `licensePlate` = #{licensePlate},
+  `crossStrength` = #{crossStrength},
+  `business` = #{business},
+  `insuredType` = #{insuredType},
+  `submission` = #{submission},
+  reject=0
+  WHERE `ncId` = #{ncId}
+    </update>
+    <!--将状态改为注销-->
+    <update id="newCarDelete" >
+          UPDATE `newcar`
+    SET
+    `state` = 0
+  WHERE `ncId` = #{ncId}
+    </update>
+    <!--根据id查询数据-->
+    <select id="newCarById" resultType="com.bdqn.pojo.NewCar">
+        select * from newcar where ncId=#{ncId}
+    </select>
+
+    <resultMap id="newCar" type="com.bdqn.pojo.NewCar">
+        <result property="ncId" column="ncId"></result>
+        <result property="company" column="company"></result>
+        <result property="customerName" column="customerName"></result>
+        <result property="telephone" column="telephone"></result>
+        <result property="licensePlate" column="licensePlate"></result>
+        <result property="crossStrength" column="crossStrength"></result>
+        <result property="business" column="business"></result>
+        <result property="insuredType" column="insuredType"></result>
+        <result property="state" column="state"></result>
+        <result property="userName" column="userName"></result>
+        <result property="submission" column="submission"></result>
+        <result property="reject" column="reject"></result>
+        <result property="rejectInformation" column="rejectInformation"></result>
+        <result property="approval" column="approval"></result>
+        <result property="receive" column="receive"></result>
+        <result property="handle" column="handle"></result>
+    </resultMap>
+
+    <!--查询车主秘书所有数据-->
+    <select id="newCarAll" resultMap="newCar" parameterType="com.bdqn.pojo.NewCar">
+        SELECT nw.*,u.userName
+        FROM newcar AS nw,USER AS u
+        WHERE nw.`userId`=u.`userid`
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="ncId != null and ncId != ''">AND ncId LIKE CONCAT('%',#{ncId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="insuredType == 1 or insuredType == 0">AND insuredType=#{insuredType}</if>
+        <if test="state == 1 or state == 0 or state == 2 or state == 3">AND nw.state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="approval == 1 or approval == 0">AND approval=#{approval}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY ncId DESC
+    </select>
+    <!--查询未提交未驳回的所有数据-->
+    <select id="newCarCaoGao" resultMap="newCar" parameterType="com.bdqn.pojo.NewCar">
+        SELECT nw.*,u.userName
+        FROM newcar AS nw,USER AS u
+        WHERE nw.`userId`=u.`userid` and submission = 0 and reject = 0 and nw.state in (1,2,3)
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="ncId != null and ncId != ''">AND ncId LIKE CONCAT('%',#{ncId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="insuredType == 1 or insuredType == 0">AND insuredType=#{insuredType}</if>
+        <if test="state == 1 or state == 0 or state == 2 or state == 3">AND nw.state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="approval == 1 or approval == 0">AND approval=#{approval}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY ncId DESC
+</select>
+
+
+    <!--查询未提交已驳回的所有数据-->
+    <select id="newCarBoHuiAll" resultMap="newCar" parameterType="com.bdqn.pojo.NewCar">
+        SELECT nw.*,u.userName
+        FROM newcar AS nw,USER AS u
+        WHERE nw.`userId`=u.`userid` and submission = 0 and reject = 1 and nw.state =1
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY ncId DESC
+    </select>
+
+    <!--查询未提交未驳回的总行数-->
+    <select id="newCarCaoGaoCount" resultType="int" parameterType="com.bdqn.pojo.NewCar">
+        SELECT count(*)
+        FROM newcar
+        WHERE submission = 0 and reject = 0 and state = 1
+    </select>
+    <!--查询未提交已驳回的总行数-->
+    <select id="newCarBoHuiCount" resultType="int" parameterType="com.bdqn.pojo.NewCar">
+        SELECT count(*)
+        FROM newcar
+        WHERE reject = 1 and submission = 0 and  state =1
+    </select>
+
+
+    <!--组长审批时查询已提交或已驳回的所有数据-->
+    <select id="newCarApprovalAll" resultMap="newCar" parameterType="com.bdqn.pojo.NewCar">
+        SELECT nw.*,u.userName
+        FROM newcar AS nw,USER AS u
+        WHERE nw.`userId`=u.`userid` AND reject = 0 AND submission = 1 and nw.state = 1
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="ncId != null and ncId != ''">AND ncId LIKE CONCAT('%',#{ncId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="insuredType == 1 or insuredType == 0">AND insuredType=#{insuredType}</if>
+        <if test="state == 1 or state == 0 or state == 2 or state == 3">AND nw.state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="approval == 1 or approval == 0">AND approval=#{approval}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY ncId DESC
+    </select>
+
+    <!--审批按钮修改-->
+    <update id="newCarApproval" >
+          UPDATE `newcar`
+          SET `approval` = 1
+          WHERE `ncId` = #{ncId}
+    </update>
+
+    <!--驳回按钮修改-->
+    <update id="newCarReject" >
+          UPDATE `newcar`
+          SET `reject` = 1,
+          submission = 0,
+          `rejectInformation` = #{rejectInformation}
+          WHERE `ncId` = #{ncId}
+    </update>
+
+    <!--调度员领取时查询已提交和已审批和已领取的所有数据-->
+    <select id="yesNewCarReceive" resultMap="newCar" parameterType="com.bdqn.pojo.NewCar">
+        SELECT nw.*,u.userName
+        FROM newcar AS nw,USER AS u
+        WHERE nw.`userId`=u.`userid` AND approval=1 AND submission = 1 and receive = 1  and nw.state in (1,2)
+        <if test="customerName != null and customerName != ''">AND customerName LIKE CONCAT('%',#{customerName},'%')</if>
+        <if test="ncId != null and ncId != ''">AND ncId LIKE CONCAT('%',#{ncId},'%')</if>
+        <if test="licensePlate != null and licensePlate != ''">AND licensePlate LIKE CONCAT('%',#{licensePlate},'%')</if>
+        <if test="insuredType == 1 or insuredType == 0">AND insuredType=#{insuredType}</if>
+        <if test="state == 1 or state == 0 or state == 2 or state == 3">AND nw.state=#{state}</if>
+        <if test="submission == 1 or submission == 0">AND submission=#{submission}</if>
+        <if test="approval == 1 or approval == 0">AND approval=#{approval}</if>
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY ncId DESC
+    </select>
+
+    <!--调度员领取时查询已提交和已审批和未领取的所有数据-->
+    <select id="noNewCarReceive" resultMap="newCar" parameterType="com.bdqn.pojo.NewCar">
+        SELECT nw.*,u.userName
+        FROM newcar AS nw,USER AS u
+        WHERE nw.`userId`=u.`userid` AND approval=1 AND submission = 1 and receive = 0 and nw.state =1
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY ncId DESC
+    </select>
+
+    <!--调度员领取信息-->
+    <update id="newCarReceiveUpdate" >
+          UPDATE `newcar`
+          SET `receive` = 1
+          WHERE `ncId` = #{ncId}
+    </update>
+
+    <!--调度员处理信息-->
+    <update id="newCarHandleUpdate" >
+          UPDATE `newcar`
+          SET `handle` = 1,state=2
+          WHERE `ncId` = #{ncId}
+    </update>
+
+    <!--查询领取箱的总行数-->
+    <select id="newCarReceiveCount" resultType="int" parameterType="com.bdqn.pojo.NewCar">
+        SELECT count(*)
+        FROM newcar
+        WHERE receive = 0 and approval = 1
+    </select>
+
+    <!--查询异常箱的总行数-->
+    <select id="newCarAbnormalCount" resultType="int" parameterType="com.bdqn.pojo.NewCar">
+        SELECT count(*)
+        FROM newcar
+        WHERE state= 3
+    </select>
+
+    <!--调度员异常数据-->
+    <update id="newCarAbnormalUpdate" >
+          UPDATE `newcar`
+          SET  state= 3,`handle` = 1
+          WHERE `ncId` = #{ncId}
+    </update>
+
+    <!--调度员查询异常箱-->
+    <select id="newCarAbnormal" resultMap="newCar" parameterType="com.bdqn.pojo.NewCar">
+        SELECT nw.*,u.userName
+        FROM newcar AS nw,USER AS u
+        WHERE nw.`userId`=u.`userid` AND approval=1  and receive = 1 and nw.state =3
+        <if test="page != null and rows != null and rows !=''">LIMIT #{page},#{rows}</if>
+        ORDER BY ncId DESC
+    </select>
+</mapper>
